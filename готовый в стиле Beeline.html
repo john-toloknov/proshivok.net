@@ -1,0 +1,247 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Прошивки для роутеров</title>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+<style>
+body {
+    font-family: arial;
+    background-color: #FFD700;
+}
+
+.sidebar {
+    height: 100%; 
+    width: 0;
+    position: fixed;
+    z-index: 1;
+    top: 0;
+    left: 0;
+    background-color: #111;
+    overflow-x: hidden;
+    transition: 0.5s;
+    padding-top: 60px;
+}
+
+.sidebar a {
+    padding: 8px 8px 8px 32px;
+    text-decoration: none;
+    font-size: 25px;
+    color: #818181;
+    display: block;
+    transition: 0.3s;
+}
+
+.sidebar a:hover {
+    color: #f1f1f1;
+}
+
+.openbtn {
+    font-size: 20px;
+    cursor: pointer;
+    background-color: #111;
+    color: white;
+    padding: 10px 15px;
+    border: none;
+    width: 100%;
+    text-align: left;
+    display: block;
+}
+
+.openbtn:hover {
+    background-color: #444;
+}
+
+.content {
+    transition: margin-left .5s;
+    padding: 0px;
+}
+
+.tabcontent {
+    display: none;
+    padding: 6px 12px;
+    border: 1px solid #000000;
+    border-top: none;
+    background-color: #FFD700;
+    margin-left: 0;
+    transition: margin-left .5s;
+}
+
+.download-link-button {
+    background-color: #000000;
+    border: 1px solid gold;
+    color: white;
+    padding: 10px 24px;
+    cursor: pointer;
+    width: 300px;
+    margin: 10px auto;
+    border-radius: 8px;
+    display: block;
+    text-align: center;
+}
+
+.download-link-button a {
+    text-decoration: none;
+    color: white;
+    display: block;
+}
+
+.download-link-button:hover {
+    background-color: #FFD700;
+    color: black;
+}
+
+@keyframes jump {
+    0% { transform: translateY(0); }
+    50% { transform: translateY(-10px); }
+    100% { transform: translateY(0); }
+}
+
+img[src$=".png"] {
+    animation: jump 2s infinite ease-in-out;
+}
+
+.router-icon-with-text i {
+    margin-right: 5px; 
+}
+</style>
+</head>
+<body>
+
+<div id="mySidebar" class="sidebar">
+  <a href="#" onclick="showContent(event, 'home')"><i class="fa fa-home"></i> HOME</a>
+  <a href="#" onclick="showContent(event, 'ax3000')" class="router-icon-with-text"><i class="fa fa-wifi"></i>AX3000</a>
+  <a href="#" onclick="showContent(event, 'ac1200')" class="router-icon-with-text"><i class="fa fa-wifi"></i>AC1200</a>
+  <a href="#" onclick="showContent(event, 'basic')"class="router-icon-with-text"><i class="fa fa-wifi"></i>BASIC</a>
+  <a href="#" onclick="showContent(event, 'turbo')"class="router-icon-with-text"><i class="fa fa-wifi"></i>TURBO</a>
+  <a href="#" onclick="showContent(event, 'c24')"class="router-icon-with-text"><i class="fa fa-wifi"></i>ARCHER C24</a>
+  <a href="mailto:YToloknov@beeline.kz" style="font-size: 25px;">
+    <i class="fa fa-envelope"></i> OUTLOOK</a>
+  </a>
+</div>
+
+<button class="openbtn" onclick="toggleNav()">&#9776;</button>
+
+<div class="content">
+
+<div id="home" class="tabcontent" style="display: block;">
+    <div style="text-align:center">
+        <h2>Прошивки для роутеров</h2>
+        <p>Добро пожаловать на страницу прошивок! Здесь вы найдёте актуальное программное обеспечение и инструкции для популярных моделей роутеров.</p>
+        <p>Чтобы начать, просто выберите нужную модель роутера в меню.</p>
+        <img src="C:\Users\johnt\OneDrive\Рабочий стол\прошивки/fon.png" alt="Главное изображение" style="width:100%; max-width: 600px; border-radius: 10px;">
+        <p>Над данным сайтом работал Толокнов Евгений</p>
+    </div>
+</div>
+
+<div id="ax3000" class="tabcontent">
+    <div style="text-align:center">
+        <h3>AX3000</h3>
+        <img src="C:\Users\johnt\OneDrive\Рабочий стол\прошивки\AX3000 черный кубик/кубик.png" width="350" height="350" alt="AX3000">
+        <div class="download-link-button">
+            <a href="C:\Users\johnt\OneDrive\Рабочий стол\прошивки\AX3000 черный кубик/YDK_MESH_V240729-sysupgrade.bin" download="ПРОШИВКА_AX3000.bin">Скачать Прошивку для AX3000</a>
+        </div>
+        <div class="download-link-button">
+            <a href="C:\Users\johnt\OneDrive\Рабочий стол\прошивки\AX3000 черный кубик/Инструкция_по_обновлению_прошивки_роутера_M3000TP.pdf" target="_blank">Открыть инструкцию по прошивке</a>
+        </div>
+        <div class="download-link-button">
+            <a href="C:\Users\johnt\OneDrive\Рабочий стол\прошивки\AX3000 черный кубик/Настройка роутера M3000TR.pdf" target="_blank">Открыть инструкцию по настройке</a>
+        </div>
+    </div>
+</div>
+
+<div id="ac1200" class="tabcontent">
+    <div style="text-align:center">
+        <h3>BASIC AC1200</h3>
+        <img src="C:\Users\johnt\OneDrive\Рабочий стол\прошивки\AC1200/ac.png" width="400" height="400" alt="BASIC AC1200">
+        <div class="download-link-button">
+            <a href="C:\Users\johnt\OneDrive\Рабочий стол\прошивки\AC1200/G12-B.7EFE5.V250206-sysupgrade.bin" download="ПРОШИВКА.bin">Скачать Прошивку для AC1200</a>
+        </div>
+        <div class="download-link-button">
+            <a href="C:\Users\johnt\OneDrive\Рабочий стол\прошивки\AC1200/Инструкция_по_обновлению_прошивки_роутера_AC1200.pdf" target="_blank">Открыть инструкцию по прошивке</a>
+        </div>
+    </div>
+</div>
+
+<div id="basic" class="tabcontent">
+    <div style="text-align:center">
+        <h3>BASIC</h3>
+        <img src="C:\Users\johnt\OneDrive\Рабочий стол\прошивки\BASIC/1.png" width="400" height="400" alt="BASIC">
+        <div class="download-link-button">
+            <a href="C:\Users\johnt\OneDrive\Рабочий стол\прошивки\BASIC/f10dvg.bin" download="ПРОШИВКА.bin">Скачать Прошивку для BASIC (DVG)</a>
+        </div>
+        <div class="download-link-button">
+            <a href="C:\Users\johnt\OneDrive\Рабочий стол\прошивки\BASIC/f10dvn.bin" download="ПРОШИВКА.bin">Скачать Прошивку для BASIC (DVN)</a>
+        </div>
+        <div class="download-link-button">
+            <a href="C:\Users\johnt\OneDrive\Рабочий стол\прошивки\BASIC/инструкция-по-установке-прошивки-роутера-f10d.pdf" target="_blank">Открыть инструкцию по прошивке</a>
+        </div>
+    </div>
+</div>
+
+<div id="turbo" class="tabcontent">
+    <div style="text-align:center">
+        <h3>TURBO</h3>
+        <img src="C:\Users\johnt\OneDrive\Рабочий стол\прошивки\TURBO/turbo.png" width="400" height="400" alt="TURBO">
+        <div class="download-link-button">
+            <a href="C:\Users\johnt\OneDrive\Рабочий стол\прошивки\TURBO/R200.14B.211223.bin" download="ПРОШИВКА.bin">Скачать Прошивку для TURBO R200</a>
+        </div>
+        <div class="download-link-button">
+            <a href="C:\Users\johnt\OneDrive\Рабочий стол\прошивки\TURBO/R201.14B.211222.bin" download="ПРОШИВКА.bin">Скачать Прошивку для TURBO R201</a>
+        </div>
+        <div class="download-link-button">
+            <a href="C:\Users\johnt\OneDrive\Рабочий стол\прошивки\TURBO/инструкция-по-обновлению-пошивки-роутера-turbo.pdf" target="_blank">Открыть инструкцию по прошивке</a>
+        </div>
+    </div>
+</div>
+
+<div id="c24" class="tabcontent">
+    <div style="text-align:center">
+        <h3>TP-LINK ARCHER C24</h3>
+        <img src="C:\Users\johnt\OneDrive\Рабочий стол\прошивки\C24/c24.png" width="400" height="400" alt="TP-Link Archer C24">
+        <div class="download-link-button">
+            <a href="C:\Users\johnt\OneDrive\Рабочий стол\прошивки\C24/tp-link-archer-c24v1.bin" download="ПРОШИВКА.bin">Скачать Прошивку для ARCHER C24</a>
+        </div>
+        <div class="download-link-button">
+            <a href="C:\Users\johnt\OneDrive\Рабочий стол\прошивки\C24/прошивка.pdf" target="_blank">Открыть инструкцию по прошивке</a>
+        </div>
+    </div>
+</div>
+
+</div> 
+<script>
+function toggleNav() {
+    const sidebar = document.getElementById("mySidebar");
+    const mainContent = document.querySelector(".content");
+
+    if (sidebar.style.width === "250px") {
+        sidebar.style.width = "0";
+        mainContent.style.marginLeft = "0";
+    } else {
+        sidebar.style.width = "250px";
+        mainContent.style.marginLeft = "250px";
+    }
+}
+
+function showContent(evt, contentId) {
+    // Скрываем все разделы с контентом
+    const allContent = document.getElementsByClassName("tabcontent");
+    for (let i = 0; i < allContent.length; i++) {
+        allContent[i].style.display = "none";
+    }
+
+    // Отображаем нужный раздел
+    document.getElementById(contentId).style.display = "block";
+
+    // Закрываем боковое меню
+    toggleNav();
+}
+
+// Показываем "HOME" по умолчанию при загрузке страницы
+document.addEventListener("DOMContentLoaded", function() {
+    document.getElementById("home").style.display = "block";
+});
+</script>
+    
+</body>
+</html>
