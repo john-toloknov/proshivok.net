@@ -15,7 +15,7 @@ const routersData = [
         icon: "fa-wifi",
         img: "кубик.png",
         links: [
-            { text: "Скачать прошивку (ZIP)", url: "ax3000-firmware.zip", download: "ax3000-firmware.zip" },
+            { text: "Скачать прошивку (ZIP)", url: "ax3000-firmware.zip" },
             { text: "Открыть инструкцию по прошивке", url: "Инструкция_по_обновлению_прошивки_роутера_M3000TP.pdf", target: "_blank" },
             { text: "Открыть инструкцию по настройке", url: "Настройка роутера M3000TR.pdf", target: "_blank" }
         ]
@@ -25,7 +25,7 @@ const routersData = [
         icon: "fa-wifi",
         img: "ac.png",
         links: [
-            { text: "Скачать прошивку (ZIP)", url: "ac1200-firmware.zip", download: "ac1200-firmware.zip" },
+            { text: "Скачать прошивку (ZIP)", url: "ac1200-firmware.zip" },
             { text: "Открыть инструкцию по прошивке", url: "Инструкция_по_обновлению_прошивки_роутера_AC1200.pdf", target: "_blank" }
         ]
     },
@@ -34,7 +34,7 @@ const routersData = [
         icon: "fa-wifi",
         img: "basic1.png",
         links: [
-            { text: "Скачать прошивки (ZIP)", url: "basic-firmwares.zip", download: "basic-firmwares.zip" },
+            { text: "Скачать прошивки (ZIP)", url: "basic-firmwares.zip" },
             { text: "Открыть инструкцию по прошивке", url: "инструкция-по-установке-прошивки-роутера-f10d.pdf", target: "_blank" }
         ]
     },
@@ -43,7 +43,7 @@ const routersData = [
         icon: "fa-wifi",
         img: "turbo.png",
         links: [
-            { text: "Скачать прошивки R200 / R201 (ZIP)", url: "turbo-firmwares.zip", download: "turbo-firmwares.zip" },
+            { text: "Скачать прошивки R200 / R201 (ZIP)", url: "turbo-firmwares.zip" },
             { text: "Открыть инструкцию по прошивке", url: "инструкция-по-обновлению-пошивки-роутера-turbo.pdf", target: "_blank" }
         ]
     },
@@ -52,12 +52,12 @@ const routersData = [
         icon: "fa-wifi",
         img: "c24.png",
         links: [
-            { text: "Скачать прошивку (ZIP)", url: "c24-firmware.zip", download: "c24-firmware.zip" },
+            { text: "Скачать прошивку (ZIP)", url: "c24-firmware.zip" },
             { text: "Открыть инструкцию по прошивке", url: "прошивка.pdf", target: "_blank" }
         ]
     }
 ];
-    
+
 function injectStyles() {
     const link = document.createElement('link');
     link.rel = 'stylesheet';
@@ -194,7 +194,6 @@ function createDOM() {
             const a = document.createElement('a');
             a.href = linkInfo.url;
             a.textContent = linkInfo.text;
-            if (linkInfo.download) a.download = linkInfo.download;
             if (linkInfo.target) a.target = linkInfo.target;
             div.appendChild(a);
             panel.appendChild(div);
