@@ -18,6 +18,7 @@ const translations = {
         welcomeText1: "Добро пожаловать! Здесь вы найдёте программное обеспечение и инструкции для актуальных моделей.",
         welcomeText2: "Выберите модель устройства в меню слева.",
         authorText: "Автор: Толокнов Евгений Алексеевич",
+        routerZte: "Приставка ZTE",
         links: {
             "Скачать прошивку": "Скачать прошивку",
             "Открыть инструкцию по прошивке": "Открыть инструкцию по прошивке",
@@ -37,6 +38,7 @@ const translations = {
         welcomeText1: "Қош келдіңіз! Мұнда сіз заманауи үлгілерге арналған бағдарламалық жасақтама мен нұсқаулықтарды табасыз.",
         welcomeText2: "Сол жақ мәзірден құрылғы үлгісін таңдаңыз.",
         authorText: "Автор: Толокнов Евгений Алексеевич",
+        routerZte: "ZTE Приставкасы",
         links: {
             "Скачать прошивку": "Прошивку жүктеу",
             "Открыть инструкцию по прошивке": "Прошивтеу нұсқаулығын ашу",
@@ -56,6 +58,7 @@ const translations = {
         welcomeText1: "Welcome! Here you will find software and instructions for up-to-date device models.",
         welcomeText2: "Select a device model from the menu on the left.",
         authorText: "Author: Yevgeny Toloknov",
+        routerZte: "ZTE TV Box",
         links: {
             "Скачать прошивку": "Download Firmware",
             "Открыть инструкцию по прошивке": "Flashing Instructions",
@@ -123,6 +126,7 @@ const routersData = [
     },
     {
         title: "Приставка ZTE",
+        isZte: true, // флаг для перевода названия приставки
         icon: "fa-television",
         img: "zte.jpg",
         links: [
@@ -165,7 +169,6 @@ function injectStyles() {
         .panel a { text-decoration: none; color: #000000; transition: color 0.3s ease; }
         .panel img { margin: 20px auto; display: block; }
         
-        /* Главная страница: гибкий контейнер для прижимания футера вниз */
         .tabcontent { 
             display: flex; 
             flex-direction: column; 
@@ -183,7 +186,6 @@ function injectStyles() {
         .download-link-button:hover { background-color: #808080; color: white; }
         .download-link-button:hover a { color: white; }
         
-        /* Стили для переключателя языков в правой верхней части */
         .lang-switcher {
             position: absolute;
             top: 15px;
@@ -251,7 +253,6 @@ function openTelegram() {
 function changeLanguage(lang) {
     currentLang = lang;
     
-    // Переключаем класс активности для кнопок языка
     document.querySelectorAll('.lang-btn').forEach(btn => {
         if(btn.getAttribute('data-lang') === lang) {
             btn.classList.add('active');
@@ -260,7 +261,6 @@ function changeLanguage(lang) {
         }
     });
 
-    // Обновляем текст на главной странице
     document.getElementById('home-title').textContent = translations[lang].welcomeHeader;
     document.getElementById('home-p1').textContent = translations[lang].welcomeText1;
     document.getElementById('home-p2').textContent = translations[lang].welcomeText2;
@@ -268,7 +268,12 @@ function changeLanguage(lang) {
     document.getElementById('home-btn-text').innerHTML = `<i class="fa fa-home"></i> ${translations[lang].homeTitle}`;
     document.getElementById('telegram-btn-text').innerHTML = `<i class="fa fa-telegram"></i> ${translations[lang].telegramTitle}`;
 
-    // Обновляем тексты кнопок скачивания/инструкций внутри панелей
+    // Обновляем название приставки ZTE в аккордеоне
+    const zteBtn = document.getElementById('zte-accordion-btn');
+    if (zteBtn) {
+        zteBtn.innerHTML = `<i class="fa fa-television"></i> ${translations[lang].routerZte}`;
+    }
+
     const linkAnchors = document.querySelectorAll('.download-link-button a');
     linkAnchors.forEach(a => {
         const originalText = a.getAttribute('data-original');
@@ -315,7 +320,6 @@ function createDOM() {
     contentContainer.className = 'content-container expanded-content-container';
     body.appendChild(contentContainer);
 
-    // Панель переключения языков справа сверху
     const langSwitcher = document.createElement('div');
     langSwitcher.className = 'lang-switcher';
     ['ru', 'kz', 'en'].forEach(lang => {
@@ -338,6 +342,9 @@ function createDOM() {
     routersData.forEach(router => {
         const btn = document.createElement('button');
         btn.className = 'accordion';
+        if (router.isZte) {
+            btn.id = 'zte-accordion-btn';
+        }
         btn.innerHTML = `<i class="fa ${router.icon}"></i> ${router.title}`;
         accordionContainer.appendChild(btn);
 
@@ -354,7 +361,7 @@ function createDOM() {
             const a = document.createElement('a');
             a.href = linkInfo.url;
             a.textContent = linkInfo.text;
-            a.setAttribute('data-original', linkInfo.text); // сохраняем оригинал для перевода
+            a.setAttribute('data-original', linkInfo.text);
             if (linkInfo.target) a.target = linkInfo.target;
             div.appendChild(a);
             panel.appendChild(div);
