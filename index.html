@@ -9,6 +9,69 @@
 
 <script>
 
+// Словарь переводов
+const translations = {
+    ru: {
+        homeTitle: "HOME",
+        telegramTitle: "TELEGRAM",
+        welcomeHeader: "Прошивки",
+        welcomeText1: "Добро пожаловать! Здесь вы найдёте программное обеспечение и инструкции для актуальных моделей.",
+        welcomeText2: "Выберите модель устройства в меню слева.",
+        authorText: "Автор: Толокнов Евгений Алексеевич",
+        links: {
+            "Скачать прошивку": "Скачать прошивку",
+            "Открыть инструкцию по прошивке": "Открыть инструкцию по прошивке",
+            "Открыть инструкцию по настройке": "Открыть инструкцию по настройке",
+            "Скачать прошивку версии (DVG)": "Скачать прошивку версии (DVG)",
+            "Скачать прошивку версии (DVN)": "Скачать прошивку версии (DVN)",
+            "Скачать прошивку версии R200": "Скачать прошивку версии R200",
+            "Скачать прошивку версии R201": "Скачать прошивку версии R201",
+            "Открыть инструкцию": "Открыть инструкцию",
+            "Список актуальных каналов": "Список актуальных каналов"
+        }
+    },
+    kz: {
+        homeTitle: "БАСТЫ БЕТ",
+        telegramTitle: "TELEGRAM",
+        welcomeHeader: "Бағдарламалық жасақтамалар",
+        welcomeText1: "Қош келдіңіз! Мұнда сіз заманауи үлгілерге арналған бағдарламалық жасақтама мен нұсқаулықтарды табасыз.",
+        welcomeText2: "Сол жақ мәзірден құрылғы үлгісін таңдаңыз.",
+        authorText: "Автор: Толокнов Евгений Алексеевич",
+        links: {
+            "Скачать прошивку": "Прошивку жүктеу",
+            "Открыть инструкцию по прошивке": "Прошивтеу нұсқаулығын ашу",
+            "Открыть инструкцию по настройке": "Баптау нұсқаулығын ашу",
+            "Скачать прошивку версии (DVG)": "(DVG) нұсқасын жүктеу",
+            "Скачать прошивку версии (DVN)": "(DVN) нұсқасын жүктеу",
+            "Скачать прошивку версии R200": "R200 нұсқасын жүктеу",
+            "Скачать прошивку версии R201": "R201 нұсқасын жүктеу",
+            "Открыть инструкцию": "Нұсқаулықты ашу",
+            "Список актуальных каналов": "Өзекті арналар тізімі"
+        }
+    },
+    en: {
+        homeTitle: "HOME",
+        telegramTitle: "TELEGRAM",
+        welcomeHeader: "Firmware & Tools",
+        welcomeText1: "Welcome! Here you will find software and instructions for up-to-date device models.",
+        welcomeText2: "Select a device model from the menu on the left.",
+        authorText: "Author: Yevgeny Toloknov",
+        links: {
+            "Скачать прошивку": "Download Firmware",
+            "Открыть инструкцию по прошивке": "Flashing Instructions",
+            "Открыть инструкцию по настройке": "Setup Instructions",
+            "Скачать прошивку версии (DVG)": "Download Firmware (DVG)",
+            "Скачать прошивку версии (DVN)": "Download Firmware (DVN)",
+            "Скачать прошивку версии R200": "Download Firmware R200",
+            "Скачать прошивку версии R201": "Download Firmware R201",
+            "Открыть инструкцию": "Open Instructions",
+            "Список актуальных каналов": "Channel List"
+        }
+    }
+};
+
+let currentLang = 'ru';
+
 const routersData = [
     {
         title: "AX3000",
@@ -88,7 +151,7 @@ function injectStyles() {
             justify-content: center;
         }
         .accordion-container { width: 40%; background-color: #111; color: white; padding-top: 60px; box-sizing: border-box; overflow-y: auto; transition: width 0.5s ease; }
-        .content-container { width: 60%; background-color: #FFD700; padding: 0; padding-top: 60px; overflow-y: auto; box-sizing: border-box; transition: width 0.5s ease; }
+        .content-container { width: 60%; background-color: #FFD700; padding: 0; padding-top: 60px; overflow-y: auto; box-sizing: border-box; transition: width 0.5s ease; position: relative; }
         .hidden-accordion-container { width: 0; padding: 0; border: none; }
         .expanded-content-container { width: 100%; }
         .toggle-accordion-btn { position: absolute; top: 15px; left: 25px; background-color: transparent; border: none; color: #000; font-size: 24px; cursor: pointer; z-index: 10; transition: all 0.5s ease; }
@@ -101,11 +164,50 @@ function injectStyles() {
         .panel { padding: 0; background-color: #ffffff; max-height: 0; overflow: hidden; transition: max-height 0.4s ease-in-out; text-align: center; }
         .panel a { text-decoration: none; color: #000000; transition: color 0.3s ease; }
         .panel img { margin: 20px auto; display: block; }
-        .tabcontent { display: block; padding: 6px 12px; border: none; background-color: #FFD700; }
+        
+        /* Главная страница: гибкий контейнер для прижимания футера вниз */
+        .tabcontent { 
+            display: flex; 
+            flex-direction: column; 
+            justify-content: space-between; 
+            align-items: center; 
+            min-height: calc(100vh - 60px); 
+            padding: 20px 12px; 
+            box-sizing: border-box; 
+            background-color: #FFD700; 
+            text-align: center; 
+        }
+
         .download-link-button { background-color: #FFD700; border: 1px solid black; color: #000000; padding: 10px 24px; cursor: pointer; width: 300px; margin: 10px auto; border-radius: 8px; display: block; text-align: center; transition: background-color 0.3s ease, color 0.3s ease; }
         .download-link-button a { text-decoration: none; color: #000000; display: block; transition: color 0.3s ease; }
         .download-link-button:hover { background-color: #808080; color: white; }
         .download-link-button:hover a { color: white; }
+        
+        /* Стили для переключателя языков в правой верхней части */
+        .lang-switcher {
+            position: absolute;
+            top: 15px;
+            right: 25px;
+            z-index: 10;
+            display: flex;
+            gap: 5px;
+        }
+        .lang-btn {
+            background-color: #111;
+            color: #FFD700;
+            border: 1px solid #000;
+            padding: 5px 10px;
+            font-size: 14px;
+            font-weight: bold;
+            cursor: pointer;
+            border-radius: 4px;
+            transition: all 0.3s ease;
+        }
+        .lang-btn:hover, .lang-btn.active {
+            background-color: #808080;
+            color: #fff;
+        }
+
         @keyframes jump { 0% { transform: translateY(0); } 50% { transform: translateY(-10px); } 100% { transform: translateY(0); } }
         .panel img, .tabcontent img { animation: jump 2s infinite ease-in-out; }
         @media (max-width: 768px) { .accordion-container.full-width-accordion { width: 100%; } .content-container.hidden-content { width: 0; padding: 0; opacity: 0; pointer-events: none; } }
@@ -142,9 +244,38 @@ function showContentAndCloseAccordion(event) {
     });
 }
 
-// Функция для перехода в Telegram
 function openTelegram() { 
     window.open("https://t.me/John_Toloknov", "_blank"); 
+}
+
+function changeLanguage(lang) {
+    currentLang = lang;
+    
+    // Переключаем класс активности для кнопок языка
+    document.querySelectorAll('.lang-btn').forEach(btn => {
+        if(btn.getAttribute('data-lang') === lang) {
+            btn.classList.add('active');
+        } else {
+            btn.classList.remove('active');
+        }
+    });
+
+    // Обновляем текст на главной странице
+    document.getElementById('home-title').textContent = translations[lang].welcomeHeader;
+    document.getElementById('home-p1').textContent = translations[lang].welcomeText1;
+    document.getElementById('home-p2').textContent = translations[lang].welcomeText2;
+    document.getElementById('author-text').textContent = translations[lang].authorText;
+    document.getElementById('home-btn-text').innerHTML = `<i class="fa fa-home"></i> ${translations[lang].homeTitle}`;
+    document.getElementById('telegram-btn-text').innerHTML = `<i class="fa fa-telegram"></i> ${translations[lang].telegramTitle}`;
+
+    // Обновляем тексты кнопок скачивания/инструкций внутри панелей
+    const linkAnchors = document.querySelectorAll('.download-link-button a');
+    linkAnchors.forEach(a => {
+        const originalText = a.getAttribute('data-original');
+        if (translations[lang].links[originalText]) {
+            a.textContent = translations[lang].links[originalText];
+        }
+    });
 }
 
 function initAccordionLogic() {
@@ -184,8 +315,22 @@ function createDOM() {
     contentContainer.className = 'content-container expanded-content-container';
     body.appendChild(contentContainer);
 
+    // Панель переключения языков справа сверху
+    const langSwitcher = document.createElement('div');
+    langSwitcher.className = 'lang-switcher';
+    ['ru', 'kz', 'en'].forEach(lang => {
+        const langBtn = document.createElement('button');
+        langBtn.className = 'lang-btn' + (lang === 'ru' ? ' active' : '');
+        langBtn.textContent = lang.toUpperCase();
+        langBtn.setAttribute('data-lang', lang);
+        langBtn.onclick = () => changeLanguage(lang);
+        langSwitcher.appendChild(langBtn);
+    });
+    contentContainer.appendChild(langSwitcher);
+
     const homeBtn = document.createElement('button');
     homeBtn.className = 'accordion';
+    homeBtn.id = 'home-btn-text';
     homeBtn.innerHTML = '<i class="fa fa-home"></i> HOME';
     homeBtn.onclick = (e) => showContentAndCloseAccordion(e);
     accordionContainer.appendChild(homeBtn);
@@ -209,6 +354,7 @@ function createDOM() {
             const a = document.createElement('a');
             a.href = linkInfo.url;
             a.textContent = linkInfo.text;
+            a.setAttribute('data-original', linkInfo.text); // сохраняем оригинал для перевода
             if (linkInfo.target) a.target = linkInfo.target;
             div.appendChild(a);
             panel.appendChild(div);
@@ -216,9 +362,9 @@ function createDOM() {
         accordionContainer.appendChild(panel);
     });
 
-    // Кнопка TELEGRAM вместо Outlook
     const telegramButton = document.createElement('button');
     telegramButton.className = 'accordion';
+    telegramButton.id = 'telegram-btn-text';
     telegramButton.innerHTML = '<i class="fa fa-telegram"></i> TELEGRAM';
     telegramButton.onclick = openTelegram;
     accordionContainer.appendChild(telegramButton);
@@ -227,12 +373,14 @@ function createDOM() {
     homeContent.id = 'home';
     homeContent.className = 'tabcontent';
     homeContent.innerHTML = `
-        <div style="text-align:center">
-            <h2>Прошивки</h2>
-            <p>Добро пожаловать! Здесь вы найдёте програмное обеспечение, и инструкции для актуальных моделей.</p>
-            <p>Выберите модель устройства в меню слева.</p>
+        <div>
+            <h2 id="home-title">Прошивки</h2>
+            <p id="home-p1">Добро пожаловать! Здесь вы найдёте программное обеспечение и инструкции для актуальных моделей.</p>
+            <p id="home-p2">Выберите модель устройства в меню слева.</p>
             <img src="fon.png" alt="Главное изображение" style="width:100%; max-width: 600px; border-radius: 10px;">
-            <p>Автор: Толокнов Евгений Алексеевич</p>
+        </div>
+        <div>
+            <p id="author-text">Автор: Толокнов Евгений Алексеевич</p>
         </div>
     `;
     contentContainer.appendChild(homeContent);
