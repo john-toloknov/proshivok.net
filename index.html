@@ -15,7 +15,7 @@ const routersData = [
         icon: "fa-wifi",
         img: "кубик.png",
         links: [
-            { text: "Скачать прошивку", url: "YDK_MESH_V240729-sysupgrade.bin", download: "ПРОШИВКА_AX3000.bin" },
+            { text: "Скачать прошивку", url: "YDK_MESH_V240729-sysupgrade.bin", target: "_blank", download: "ПРОШИВКА_AX3000.bin" },
             { text: "Открыть инструкцию по прошивке", url: "Инструкция_по_обновлению_прошивки_роутера_M3000TP.pdf", target: "_blank" },
             { text: "Открыть инструкцию по настройке", url: "Настройка роутера M3000TR.pdf", target: "_blank" }
         ]
@@ -25,7 +25,7 @@ const routersData = [
         icon: "fa-wifi",
         img: "ac.png",
         links: [
-            { text: "Скачать прошивку", url: "G12-B.7EFE5.V250206-sysupgrade.bin", download: "ПРОШИВКА.bin" },
+            { text: "Скачать прошивку", url: "G12-B.7EFE5.V250206-sysupgrade.bin", target: "_blank", download: "ПРОШИВКА.bin" },
             { text: "Открыть инструкцию по прошивке", url: "Инструкция_по_обновлению_прошивки_роутера_AC1200.pdf", target: "_blank" }
         ]
     },
@@ -34,8 +34,8 @@ const routersData = [
         icon: "fa-wifi",
         img: "basic1.png",
         links: [
-            { text: "Скачать прошивку версии (DVG)", url: "f10dvg.bin", download: "ПРОШИВКА.bin" },
-            { text: "Скачать прошивку версии (DVN)", url: "f10dvn.bin", download: "ПРОШИВКА.bin" },
+            { text: "Скачать прошивку версии (DVG)", url: "f10dvg.bin", target: "_blank", download: "ПРОШИВКА.bin" },
+            { text: "Скачать прошивку версии (DVN)", url: "f10dvn.bin", target: "_blank", download: "ПРОШИВКА.bin" },
             { text: "Открыть инструкцию по прошивке", url: "инструкция-по-установке-прошивки-роутера-f10d.pdf", target: "_blank" }
         ]
     },
@@ -47,11 +47,13 @@ const routersData = [
             { 
                 text: "Скачать прошивку версии R200", 
                 url: "R200.14B.211223.bin", 
+                target: "_blank",
                 download: "R200.14B.211223.bin" 
             },
             { 
                 text: "Скачать прошивку версии R201", 
                 url: "R201.14B.211222.bin", 
+                target: "_blank",
                 download: "R201.14B.211222.bin" 
             },
             { 
@@ -66,12 +68,11 @@ const routersData = [
         icon: "fa-wifi",
         img: "c24.png",
         links: [
-            { text: "Скачать прошивку", url: "tp-link-archer-c24v1.bin", download: "ПРОШИВКА.bin" },
+            { text: "Скачать прошивку", url: "tp-link-archer-c24v1.bin", target: "_blank", download: "ПРОШИВКА.bin" },
             { text: "Открыть инструкцию по прошивке", url: "прошивка.pdf", target: "_blank" }
         ]
     }
 ];
-
 function injectStyles() {
     const link = document.createElement('link');
     link.rel = 'stylesheet';
