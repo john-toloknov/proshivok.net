@@ -1,0 +1,253 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Прошивки для роутеров</title>
+</head>
+<body>
+
+<script>
+
+const routersData = [
+    {
+        title: "AX3000",
+        icon: "fa-wifi",
+        img: "AX3000/кубик.png",
+        links: [
+            { text: "Скачать прошивку", url: "AX3000/YDK_MESH_V240729-sysupgrade.bin", download: "ПРОШИВКА_AX3000.bin" },
+            { text: "Открыть инструкцию по прошивке", url: "AX3000/Инструкция_по_обновлению_прошивки_роутера_M3000TP.pdf", target: "_blank" },
+            { text: "Открыть инструкцию по настройке", url: "AX3000/Настройка роутера M3000TR.pdf", target: "_blank" }
+        ]
+    },
+    {
+        title: "BASIC AC1200",
+        icon: "fa-wifi",
+        img: "AC1200/ac.png",
+        links: [
+            { text: "Скачать прошивку", url: "AC1200/G12-B.7EFE5.V250206-sysupgrade.bin", download: "ПРОШИВКА.bin" },
+            { text: "Открыть инструкцию по прошивке", url: "AC1200/Инструкция_по_обновлению_прошивки_роутера_AC1200.pdf", target: "_blank" }
+        ]
+    },
+    {
+        title: "BASIC",
+        icon: "fa-wifi",
+        img: "BASIC/basic1.png",
+        links: [
+            { text: "Скачать прошивку версии (DVG)", url: "BASIC/f10dvg.bin", download: "ПРОШИВКА.bin" },
+            { text: "Скачать прошивку версии (DVN)", url: "BASIC/f10dvn.bin", download: "ПРОШИВКА.bin" },
+            { text: "Открыть инструкцию по прошивке", url: "BASIC/инструкция-по-установке-прошивки-роутера-f10d.pdf", target: "_blank" }
+        ]
+    },
+    {
+        title: "TURBO",
+        icon: "fa-wifi",
+        img: "TURBO/turbo.png",
+        links: [
+            { 
+                text: "Скачать прошивку версии R200", 
+                url: "TURBO/R200.14B.211223.bin", 
+                download: "R200.14B.211223.bin" 
+            },
+            { 
+                text: "Скачать прошивку версии R201", 
+                url: "TURBO/R201.14B.211222.bin", 
+                download: "R201.14B.211222.bin" 
+            },
+            { 
+                text: "Открыть инструкцию по прошивке", 
+                url: "TURBO/инструкция-по-обновлению-пошивки-роутера-turbo.pdf", 
+                target: "_blank" 
+            }
+        ]
+    },
+    {
+        title: "ARCHER C24",
+        icon: "fa-wifi",
+        img: "C24/c24.png",
+        links: [
+            { text: "Скачать прошивку", url: "C24/tp-link-archer-c24v1.bin", download: "ПРОШИВКА.bin" },
+            { text: "Открыть инструкцию по прошивке", url: "C24/прошивка.pdf", target: "_blank" }
+        ]
+    }
+];
+
+function injectStyles() {
+    const link = document.createElement('link');
+    link.rel = 'stylesheet';
+    link.href = 'https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css';
+    document.head.appendChild(link);
+
+    const style = document.createElement('style');
+    style.innerHTML = `
+        body {
+            font-family: arial;
+            background-color: #FFD700;
+            margin: 0;
+            display: flex;
+            min-height: 100vh;
+            transition: all 0.5s ease;
+            justify-content: center;
+        }
+        .accordion-container { width: 40%; background-color: #111; color: white; padding-top: 60px; box-sizing: border-box; overflow-y: auto; transition: width 0.5s ease; }
+        .content-container { width: 60%; background-color: #FFD700; padding: 0; padding-top: 60px; overflow-y: auto; box-sizing: border-box; transition: width 0.5s ease; }
+        .hidden-accordion-container { width: 0; padding: 0; border: none; }
+        .expanded-content-container { width: 100%; }
+        .toggle-accordion-btn { position: absolute; top: 15px; left: 25px; background-color: transparent; border: none; color: #000; font-size: 24px; cursor: pointer; z-index: 10; transition: all 0.5s ease; }
+        .toggle-accordion-btn:hover { color: #808080; }
+        .toggle-accordion-btn.hidden { opacity: 0; pointer-events: none; }
+        .accordion { background-color: #111; color: white; cursor: pointer; padding: 18px; width: 100%; border: none; text-align: left; outline: none; font-size: 20px; transition: background-color 0.3s ease, color 0.3s ease; border-bottom: 1px solid #111; text-decoration: none; display: block; }
+        .accordion i { margin-right: 10px; color: white; transition: color 0.3s ease; }
+        .accordion.active, .accordion:hover { background-color: #808080; color: white; }
+        .accordion.active i, .accordion:hover i { color: white; }
+        .panel { padding: 0; background-color: #ffffff; max-height: 0; overflow: hidden; transition: max-height 0.4s ease-in-out; text-align: center; }
+        .panel a { text-decoration: none; color: #000000; transition: color 0.3s ease; }
+        .panel img { margin: 20px auto; display: block; }
+        .tabcontent { display: block; padding: 6px 12px; border: none; background-color: #FFD700; }
+        .download-link-button { background-color: #FFD700; border: 1px solid black; color: #000000; padding: 10px 24px; cursor: pointer; width: 300px; margin: 10px auto; border-radius: 8px; display: block; text-align: center; transition: background-color 0.3s ease, color 0.3s ease; }
+        .download-link-button a { text-decoration: none; color: #000000; display: block; transition: color 0.3s ease; }
+        .download-link-button:hover { background-color: #808080; color: white; }
+        .download-link-button:hover a { color: white; }
+        @keyframes jump { 0% { transform: translateY(0); } 50% { transform: translateY(-10px); } 100% { transform: translateY(0); } }
+        img[src$=".png"] { animation: jump 2s infinite ease-in-out; }
+        @media (max-width: 768px) { .accordion-container.full-width-accordion { width: 100%; } .content-container.hidden-content { width: 0; padding: 0; opacity: 0; pointer-events: none; } }
+    `;
+    document.head.appendChild(style);
+}
+
+function openAccordion() {
+    const accordionContainer = document.querySelector('.accordion-container');
+    const contentContainer = document.querySelector('.content-container');
+    const toggleBtn = document.querySelector('.toggle-accordion-btn');
+    accordionContainer.classList.remove('hidden-accordion-container');
+    contentContainer.classList.remove('expanded-content-container');
+    accordionContainer.classList.add('full-width-accordion');
+    contentContainer.classList.add('hidden-content');
+    toggleBtn.classList.add('hidden');
+}
+
+function showContentAndCloseAccordion(event) {
+    if(event) event.preventDefault();
+    const accordionContainer = document.querySelector('.accordion-container');
+    const contentContainer = document.querySelector('.content-container');
+    const toggleBtn = document.querySelector('.toggle-accordion-btn');
+    accordionContainer.classList.remove('full-width-accordion');
+    contentContainer.classList.remove('hidden-content');
+    accordionContainer.classList.add('hidden-accordion-container');
+    contentContainer.classList.add('expanded-content-container');
+    toggleBtn.classList.remove('hidden');
+    const accordions = document.querySelectorAll(".accordion");
+    accordions.forEach(acc => {
+         acc.classList.remove("active");
+         const panel = acc.nextElementSibling;
+         if (panel && panel.classList.contains('panel')) { panel.style.maxHeight = null; }
+    });
+}
+
+function sendEmail() { window.location.href = "mailto:YToloknov@beeline.kz"; }
+
+function initAccordionLogic() {
+    const accordions = document.querySelectorAll(".accordion");
+    accordions.forEach(button => {
+        if (button.nextElementSibling && button.nextElementSibling.classList.contains('panel')) {
+            button.addEventListener("click", function() {
+                const allPanels = document.querySelectorAll('.panel');
+                allPanels.forEach(p => {
+                    if (p !== this.nextElementSibling) {
+                        p.style.maxHeight = null;
+                        if(p.previousElementSibling) p.previousElementSibling.classList.remove('active');
+                    }
+                });
+                this.classList.toggle("active");
+                const panel = this.nextElementSibling;
+                if (panel.style.maxHeight) { panel.style.maxHeight = null; } else { panel.style.maxHeight = panel.scrollHeight + "px"; }
+            });
+        }
+    });
+}
+
+function createDOM() {
+    const body = document.body;
+
+    const toggleBtn = document.createElement('button');
+    toggleBtn.className = 'toggle-accordion-btn';
+    toggleBtn.innerHTML = '<i class="fa fa-bars"></i>';
+    toggleBtn.onclick = openAccordion;
+    body.appendChild(toggleBtn);
+
+    const accordionContainer = document.createElement('div');
+    accordionContainer.className = 'accordion-container hidden-accordion-container';
+    body.appendChild(accordionContainer);
+
+    const contentContainer = document.createElement('div');
+    contentContainer.className = 'content-container expanded-content-container';
+    body.appendChild(contentContainer);
+
+    const homeBtn = document.createElement('button');
+    homeBtn.className = 'accordion';
+    homeBtn.innerHTML = '<i class="fa fa-home"></i> HOME';
+    homeBtn.onclick = (e) => showContentAndCloseAccordion(e);
+    accordionContainer.appendChild(homeBtn);
+
+    routersData.forEach(router => {
+        const btn = document.createElement('button');
+        btn.className = 'accordion';
+        btn.innerHTML = `<i class="fa ${router.icon}"></i> ${router.title}`;
+        accordionContainer.appendChild(btn);
+
+        const panel = document.createElement('div');
+        panel.className = 'panel';
+        const img = document.createElement('img');
+        img.src = router.img;
+        img.width = 200; img.height = 200; img.alt = router.title;
+        panel.appendChild(img);
+
+        router.links.forEach(linkInfo => {
+            const div = document.createElement('div');
+            div.className = 'download-link-button';
+            const a = document.createElement('a');
+            a.href = linkInfo.url;
+            a.textContent = linkInfo.text;
+            if (linkInfo.download) a.download = linkInfo.download;
+            if (linkInfo.target) a.target = linkInfo.target;
+            div.appendChild(a);
+            panel.appendChild(div);
+        });
+        accordionContainer.appendChild(panel);
+    });
+
+    const emailBtn = document.createElement('button');
+    emailBtn.className = 'accordion';
+    emailBtn.innerHTML = '<i class="fa fa-envelope"></i> OUTLOOK';
+    emailBtn.onclick = sendEmail;
+    accordionContainer.appendChild(emailBtn);
+
+    const homeContent = document.createElement('div');
+    homeContent.id = 'home';
+    homeContent.className = 'tabcontent';
+    homeContent.innerHTML = `
+        <div style="text-align:center">
+            <h2>Прошивки для роутеров</h2>
+            <p>Добро пожаловать! Здесь вы найдёте ПО для актуальных моделей роутеров.</p>
+            <p>Выберите модель роутера в меню слева.</p>
+            <img src="fon.png" alt="Главное изображение" style="width:100%; max-width: 600px; border-radius: 10px;">
+            <p>Автор Толокнов Евгений Алексеевич</p>
+        </div>
+    `;
+    contentContainer.appendChild(homeContent);
+}
+
+document.addEventListener("DOMContentLoaded", function() {
+    injectStyles();
+    createDOM();
+    initAccordionLogic();
+    const accordionContainer = document.querySelector('.accordion-container');
+    const toggleBtn = document.querySelector('.toggle-accordion-btn');
+    if (accordionContainer.classList.contains('hidden-accordion-container')) {
+        toggleBtn.classList.remove('hidden');
+    }
+});
+</script>
+
+</body>
+</html>
