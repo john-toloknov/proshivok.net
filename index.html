@@ -57,6 +57,16 @@ const routersData = [
             { text: "Скачать прошивку", url: "https://john-toloknov.github.io/proshivok.net/tp-link-archer-c24v1.bin", target: "_blank" },
             { text: "Открыть инструкцию по прошивке", url: "прошивка.pdf", target: "_blank" }
         ]
+    },
+    {
+        title: "Приставка ZTE",
+        icon: "fa-television",
+        img: "zte.jpg",
+        links: [
+            { text: "Скачать прошивку", url: "https://john-toloknov.github.io/proshivok.net/app-atv-beeline_9.0.0_kz.apk", target: "_blank" },
+            { text: "Открыть инструкцию", url: "Инструкция по на...йке STB ZTE.pdf", target: "_blank" },
+            { text: "Список актуальных каналов", url: "https://docs.google.com/spreadsheets/d/1YB1xc289SKMpMcrI-Xr_oTEvGXIf2SroEWVaUeEY34o/edit?gid=1278118745#gid=1278118745", target: "_blank" }
+        ]
     }
 ];
 
@@ -184,7 +194,6 @@ function createDOM() {
         accordionContainer.appendChild(btn);
 
         const panel = document.createElement('div');
-        panel.className, 'panel';
         panel.className = 'panel';
         const img = document.createElement('img');
         img.src = router.img;
@@ -219,7 +228,7 @@ function createDOM() {
             <p>Добро пожаловать! Здесь вы найдёте ПО для актуальных моделей роутеров.</p>
             <p>Выберите модель роутера в меню слева.</p>
             <img src="fon.png" alt="Главное изображение" style="width:100%; max-width: 600px; border-radius: 10px;">
-            <p>Автор Толокнов Евгений Алексеевич 😄</p>
+            <p>Автор Толокнов Евгений Алексеевич</p>
         </div>
     `;
     contentContainer.appendChild(homeContent);
