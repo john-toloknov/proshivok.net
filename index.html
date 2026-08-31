@@ -64,7 +64,7 @@ const routersData = [
         img: "zte.jpg",
         links: [
             { text: "Скачать прошивку", url: "https://john-toloknov.github.io/proshivok.net/app-atv-beeline_9.0.0_kz.apk", target: "_blank" },
-            { text: "Открыть инструкцию", url: "Инструкция по настройке STB ZTE.docx", target: "_blank" },
+            { text: "Открыть инструкцию", url: "Инструкия по настройке STB ZTE.pdf", target: "_blank" },
             { text: "Список актуальных каналов", url: "https://docs.google.com/spreadsheets/d/1YB1xc289SKMpMcrI-Xr_oTEvGXIf2SroEWVaUeEY34o/edit?gid=1278118745#gid=1278118745", target: "_blank" }
         ]
     }
@@ -107,7 +107,7 @@ function injectStyles() {
         .download-link-button:hover { background-color: #808080; color: white; }
         .download-link-button:hover a { color: white; }
         @keyframes jump { 0% { transform: translateY(0); } 50% { transform: translateY(-10px); } 100% { transform: translateY(0); } }
-        .panel img { animation: jump 2s infinite ease-in-out; }
+        .panel img, .tabcontent img { animation: jump 2s infinite ease-in-out; }
         @media (max-width: 768px) { .accordion-container.full-width-accordion { width: 100%; } .content-container.hidden-content { width: 0; padding: 0; opacity: 0; pointer-events: none; } }
     `;
     document.head.appendChild(style);
@@ -228,7 +228,7 @@ function createDOM() {
             <p>Добро пожаловать! Здесь вы найдёте ПО для актуальных моделей роутеров.</p>
             <p>Выберите модель роутера в меню слева.</p>
             <img src="fon.png" alt="Главное изображение" style="width:100%; max-width: 600px; border-radius: 10px;">
-            <p>Автор Толокнов Евгений Алексеевич</p>
+            <p>Автор Толокнов Евгений Алексеевич 😁</p>
         </div>
     `;
     contentContainer.appendChild(homeContent);
