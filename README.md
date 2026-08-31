@@ -1,2 +1,0 @@
-# proshivok.net
-J.T.
