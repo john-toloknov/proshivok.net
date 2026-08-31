@@ -107,7 +107,7 @@ function injectStyles() {
         .download-link-button:hover { background-color: #808080; color: white; }
         .download-link-button:hover a { color: white; }
         @keyframes jump { 0% { transform: translateY(0); } 50% { transform: translateY(-10px); } 100% { transform: translateY(0); } }
-        img[src$=".png"] { animation: jump 2s infinite ease-in-out; }
+        .panel img { animation: jump 2s infinite ease-in-out; }
         @media (max-width: 768px) { .accordion-container.full-width-accordion { width: 100%; } .content-container.hidden-content { width: 0; padding: 0; opacity: 0; pointer-events: none; } }
     `;
     document.head.appendChild(style);
@@ -145,106 +145,4 @@ function showContentAndCloseAccordion(event) {
 function sendEmail() { window.location.href = "mailto:YToloknov@beeline.kz"; }
 
 function initAccordionLogic() {
-    const accordions = document.querySelectorAll(".accordion");
-    accordions.forEach(button => {
-        if (button.nextElementSibling && button.nextElementSibling.classList.contains('panel')) {
-            button.addEventListener("click", function() {
-                const allPanels = document.querySelectorAll('.panel');
-                allPanels.forEach(p => {
-                    if (p !== this.nextElementSibling) {
-                        p.style.maxHeight = null;
-                        if(p.previousElementSibling) p.previousElementSibling.classList.remove('active');
-                    }
-                });
-                this.classList.toggle("active");
-                const panel = this.nextElementSibling;
-                if (panel.style.maxHeight) { panel.style.maxHeight = null; } else { panel.style.maxHeight = panel.scrollHeight + "px"; }
-            });
-        }
-    });
-}
-
-function createDOM() {
-    const body = document.body;
-
-    const toggleBtn = document.createElement('button');
-    toggleBtn.className = 'toggle-accordion-btn';
-    toggleBtn.innerHTML = '<i class="fa fa-bars"></i>';
-    toggleBtn.onclick = openAccordion;
-    body.appendChild(toggleBtn);
-
-    const accordionContainer = document.createElement('div');
-    accordionContainer.className = 'accordion-container hidden-accordion-container';
-    body.appendChild(accordionContainer);
-
-    const contentContainer = document.createElement('div');
-    contentContainer.className = 'content-container expanded-content-container';
-    body.appendChild(contentContainer);
-
-    const homeBtn = document.createElement('button');
-    homeBtn.className = 'accordion';
-    homeBtn.innerHTML = '<i class="fa fa-home"></i> HOME';
-    homeBtn.onclick = (e) => showContentAndCloseAccordion(e);
-    accordionContainer.appendChild(homeBtn);
-
-    routersData.forEach(router => {
-        const btn = document.createElement('button');
-        btn.className = 'accordion';
-        btn.innerHTML = `<i class="fa ${router.icon}"></i> ${router.title}`;
-        accordionContainer.appendChild(btn);
-
-        const panel = document.createElement('div');
-        panel.className = 'panel';
-        const img = document.createElement('img');
-        img.src = router.img;
-        img.width = 200; img.height = 200; img.alt = router.title;
-        panel.appendChild(img);
-
-        router.links.forEach(linkInfo => {
-            const div = document.createElement('div');
-            div.className = 'download-link-button';
-            const a = document.createElement('a');
-            a.href = linkInfo.url;
-            a.textContent = linkInfo.text;
-            if (linkInfo.target) a.target = linkInfo.target;
-            div.appendChild(a);
-            panel.appendChild(div);
-        });
-        accordionContainer.appendChild(panel);
-    });
-
-    const emailButton = document.createElement('button');
-    emailButton.className = 'accordion';
-    emailButton.innerHTML = '<i class="fa fa-envelope"></i> OUTLOOK';
-    emailButton.onclick = sendEmail;
-    accordionContainer.appendChild(emailButton);
-
-    const homeContent = document.createElement('div');
-    homeContent.id = 'home';
-    homeContent.className = 'tabcontent';
-    homeContent.innerHTML = `
-        <div style="text-align:center">
-            <h2>Прошивки для роутеров</h2>
-            <p>Добро пожаловать! Здесь вы найдёте ПО для актуальных моделей роутеров.</p>
-            <p>Выберите модель роутера в меню слева.</p>
-            <img src="fon.png" alt="Главное изображение" style="width:100%; max-width: 600px; border-radius: 10px;">
-            <p>Автор Толокнов Евгений Алексеевич</p>
-        </div>
-    `;
-    contentContainer.appendChild(homeContent);
-}
-
-document.addEventListener("DOMContentLoaded", function() {
-    injectStyles();
-    createDOM();
-    initAccordionLogic();
-    const accordionContainer = document.querySelector('.accordion-container');
-    const toggleBtn = document.querySelector('.toggle-accordion-btn');
-    if (accordionContainer.classList.contains('hidden-accordion-container')) {
-        toggleBtn.classList.remove('hidden');
-    }
-});
-</script>
-
-</body>
-</html>
+    const accordions = document.querySelectorAll
