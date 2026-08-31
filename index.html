@@ -64,7 +64,7 @@ const routersData = [
         img: "zte.jpg",
         links: [
             { text: "Скачать прошивку", url: "https://john-toloknov.github.io/proshivok.net/app-atv-beeline_9.0.0_kz.apk", target: "_blank" },
-            { text: "Открыть инструкцию", url: "Инструкия по настройке STB ZTE.pdf", target: "_blank" },
+            { text: "Открыть инструкцию", url: "Инструкция по настройке STB ZTE.pdf", target: "_blank" },
             { text: "Список актуальных каналов", url: "https://docs.google.com/spreadsheets/d/1YB1xc289SKMpMcrI-Xr_oTEvGXIf2SroEWVaUeEY34o/edit?gid=1278118745#gid=1278118745", target: "_blank" }
         ]
     }
@@ -142,7 +142,10 @@ function showContentAndCloseAccordion(event) {
     });
 }
 
-function sendEmail() { window.location.href = "mailto:YToloknov@beeline.kz"; }
+// Функция для перехода в Telegram
+function openTelegram() { 
+    window.open("https://t.me/John_Toloknov", "_blank"); 
+}
 
 function initAccordionLogic() {
     const accordions = document.querySelectorAll(".accordion");
@@ -213,11 +216,12 @@ function createDOM() {
         accordionContainer.appendChild(panel);
     });
 
-    const emailButton = document.createElement('button');
-    emailButton.className = 'accordion';
-    emailButton.innerHTML = '<i class="fa fa-envelope"></i> OUTLOOK';
-    emailButton.onclick = sendEmail;
-    accordionContainer.appendChild(emailButton);
+    // Кнопка TELEGRAM вместо Outlook
+    const telegramButton = document.createElement('button');
+    telegramButton.className = 'accordion';
+    telegramButton.innerHTML = '<i class="fa fa-telegram"></i> TELEGRAM';
+    telegramButton.onclick = openTelegram;
+    accordionContainer.appendChild(telegramButton);
 
     const homeContent = document.createElement('div');
     homeContent.id = 'home';
@@ -228,7 +232,7 @@ function createDOM() {
             <p>Добро пожаловать! Здесь вы найдёте ПО для актуальных моделей роутеров.</p>
             <p>Выберите модель роутера в меню слева.</p>
             <img src="fon.png" alt="Главное изображение" style="width:100%; max-width: 600px; border-radius: 10px;">
-            <p>Автор - Толокнов Евгений Алексеевич</p>
+            <p>Автор Толокнов Евгений Алексеевич</p>
         </div>
     `;
     contentContainer.appendChild(homeContent);
