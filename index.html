@@ -13,61 +13,49 @@ const routersData = [
     {
         title: "AX3000",
         icon: "fa-wifi",
-        img: "AX3000/кубик.png",
+        img: "/proshivok.net/AX3000/кубик.png",
         links: [
             { text: "Скачать прошивку", url: "https://john-toloknov.github.io/proshivok.net/AX3000/YDK_MESH_V240729-sysupgrade.bin", target: "_blank" },
-            { text: "Открыть инструкцию по прошивке", url: "AX3000/Инструкция_по_обновлению_прошивки_роутера_M3000TP.pdf", target: "_blank" },
-            { text: "Открыть инструкцию по настройке", url: "AX3000/Настройка роутера M3000TR.pdf", target: "_blank" }
+            { text: "Открыть инструкцию по прошивке", url: "https://john-toloknov.github.io/proshivok.net/AX3000/Инструкция_по_обновлению_прошивки_роутера_M3000TP.pdf", target: "_blank" },
+            { text: "Открыть инструкцию по настройке", url: "https://john-toloknov.github.io/proshivok.net/AX3000/Настройка роутера M3000TR.pdf", target: "_blank" }
         ]
     },
     {
         title: "BASIC AC1200",
         icon: "fa-wifi",
-        img: "AC1200/ac.png",
+        img: "/proshivok.net/AC1200/ac.png",
         links: [
             { text: "Скачать прошивку", url: "https://john-toloknov.github.io/proshivok.net/AC1200/G12-B.7EFE5.V250206-sysupgrade.bin", target: "_blank" },
-            { text: "Открыть инструкцию по прошивке", url: "AC1200/Инструкция_по_обновлению_прошивки_роутера_AC1200.pdf", target: "_blank" }
+            { text: "Открыть инструкцию по прошивке", url: "https://john-toloknov.github.io/proshivok.net/AC1200/Инструкция_по_обновлению_прошивки_роутера_AC1200.pdf", target: "_blank" }
         ]
     },
     {
         title: "BASIC",
         icon: "fa-wifi",
-        img: "BASIC/basic1.png",
+        img: "/proshivok.net/BASIC/basic1.png",
         links: [
             { text: "Скачать прошивку версии (DVG)", url: "https://john-toloknov.github.io/proshivok.net/BASIC/f10dvg.bin", target: "_blank" },
             { text: "Скачать прошивку версии (DVN)", url: "https://john-toloknov.github.io/proshivok.net/BASIC/f10dvn.bin", target: "_blank" },
-            { text: "Открыть инструкцию по прошивке", url: "BASIC/инструкция-по-установке-прошивки-роутера-f10d.pdf", target: "_blank" }
+            { text: "Открыть инструкцию по прошивке", url: "https://john-toloknov.github.io/proshivok.net/BASIC/инструкция-по-установке-прошивки-роутера-f10d.pdf", target: "_blank" }
         ]
     },
     {
         title: "TURBO",
         icon: "fa-wifi",
-        img: "TURBO/turbo.png",
+        img: "/proshivok.net/TURBO/turbo.png",
         links: [
-            { 
-                text: "Скачать прошивку версии R200", 
-                url: "https://john-toloknov.github.io/proshivok.net/TURBO/R200.14B.211223.bin", 
-                target: "_blank"
-            },
-            { 
-                text: "Скачать прошивку версии R201", 
-                url: "https://john-toloknov.github.io/proshivok.net/TURBO/R201.14B.211222.bin", 
-                target: "_blank"
-            },
-            { 
-                text: "Открыть инструкцию по прошивке", 
-                url: "TURBO/инструкция-по-обновлению-пошивки-роутера-turbo.pdf", 
-                target: "_blank" 
-            }
+            { text: "Скачать прошивку версии R200", url: "https://john-toloknov.github.io/proshivok.net/TURBO/R200.14B.211223.bin", target: "_blank" },
+            { text: "Скачать прошивку версии R201", url: "https://john-toloknov.github.io/proshivok.net/TURBO/R201.14B.211222.bin", target: "_blank" },
+            { text: "Открыть инструкцию по прошивке", url: "https://john-toloknov.github.io/proshivok.net/TURBO/инструкция-по-обновлению-пошивки-роутера-turbo.pdf", target: "_blank" }
         ]
     },
     {
         title: "ARCHER C24",
         icon: "fa-wifi",
-        img: "C24/c24.png",
+        img: "/proshivok.net/C24/c24.png",
         links: [
             { text: "Скачать прошивку", url: "https://john-toloknov.github.io/proshivok.net/C24/tp-link-archer-c24v1.bin", target: "_blank" },
-            { text: "Открыть инструкцию по прошивке", url: "C24/прошивка.pdf", target: "_blank" }
+            { text: "Открыть инструкцию по прошивке", url: "https://john-toloknov.github.io/proshivok.net/C24/прошивка.pdf", target: "_blank" }
         ]
     }
 ];
@@ -215,11 +203,13 @@ function createDOM() {
         accordionContainer.appendChild(panel);
     });
 
-    const emailBtn = document.createElement('button');
-    emailBtn.className = 'accordion';
-    emailBtn.innerHTML = '<i class="fa fa-envelope"></i> OUTLOOK';
-    emailBtn.onclick = sendEmail;
-    accordionContainer.appendChild(emailBtn);
+    const emailBtn = document.content ? null : document.createElement('button');
+    // Исправлено создание кнопки почты
+    const emailButton = document.createElement('button');
+    emailButton.className = 'accordion';
+    emailButton.innerHTML = '<i class="fa fa-envelope"></i> OUTLOOK';
+    emailButton.onclick = sendEmail;
+    accordionContainer.appendChild(emailButton);
 
     const homeContent = document.createElement('div');
     homeContent.id = 'home';
@@ -229,7 +219,7 @@ function createDOM() {
             <h2>Прошивки для роутеров</h2>
             <p>Добро пожаловать! Здесь вы найдёте ПО для актуальных моделей роутеров.</p>
             <p>Выберите модель роутера в меню слева.</p>
-            <img src="fon.png" alt="Главное изображение" style="width:100%; max-width: 600px; border-radius: 10px;">
+            <img src="/proshivok.net/fon.png" alt="Главное изображение" style="width:100%; max-width: 600px; border-radius: 10px;">
             <p>Автор Толокнов Евгений Алексеевич</p>
         </div>
     `;
