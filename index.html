@@ -9,72 +9,6 @@
 
 <script>
 
-// Словарь переводов
-const translations = {
-    ru: {
-        homeTitle: "HOME",
-        telegramTitle: "TELEGRAM",
-        welcomeHeader: "Прошивки",
-        welcomeText1: "Добро пожаловать! Здесь вы найдёте программное обеспечение и инструкции для актуальных моделей.",
-        welcomeText2: "Выберите модель устройства в меню слева.",
-        authorText: "Автор: Толокнов Евгений Алексеевич",
-        routerZte: "Приставка ZTE",
-        links: {
-            "Скачать прошивку": "Скачать прошивку",
-            "Открыть инструкцию по прошивке": "Открыть инструкцию по прошивке",
-            "Открыть инструкцию по настройке": "Открыть инструкцию по настройке",
-            "Скачать прошивку версии (DVG)": "Скачать прошивку версии (DVG)",
-            "Скачать прошивку версии (DVN)": "Скачать прошивку версии (DVN)",
-            "Скачать прошивку версии R200": "Скачать прошивку версии R200",
-            "Скачать прошивку версии R201": "Скачать прошивку версии R201",
-            "Открыть инструкцию": "Открыть инструкцию",
-            "Список актуальных каналов": "Список актуальных каналов"
-        }
-    },
-    kz: {
-        homeTitle: "БАСТЫ БЕТ",
-        telegramTitle: "TELEGRAM",
-        welcomeHeader: "Бағдарламалық жасақтамалар",
-        welcomeText1: "Қош келдіңіз! Мұнда сіз заманауи үлгілерге арналған бағдарламалық жасақтама мен нұсқаулықтарды табасыз.",
-        welcomeText2: "Сол жақ мәзірден құрылғы үлгісін таңдаңыз.",
-        authorText: "Автор: Толокнов Евгений Алексеевич",
-        routerZte: "ZTE Приставкасы",
-        links: {
-            "Скачать прошивку": "Прошивку жүктеу",
-            "Открыть инструкцию по прошивке": "Прошивтеу нұсқаулығын ашу",
-            "Открыть инструкцию по настройке": "Баптау нұсқаулығын ашу",
-            "Скачать прошивку версии (DVG)": "(DVG) нұсқасын жүктеу",
-            "Скачать прошивку версии (DVN)": "(DVN) нұсқасын жүктеу",
-            "Скачать прошивку версии R200": "R200 нұсқасын жүктеу",
-            "Скачать прошивку версии R201": "R201 нұсқасын жүктеу",
-            "Открыть инструкцию": "Нұсқаулықты ашу",
-            "Список актуальных каналов": "Өзекті арналар тізімі"
-        }
-    },
-    en: {
-        homeTitle: "HOME",
-        telegramTitle: "TELEGRAM",
-        welcomeHeader: "Firmware & Tools",
-        welcomeText1: "Welcome! Here you will find software and instructions for up-to-date device models.",
-        welcomeText2: "Select a device model from the menu on the left.",
-        authorText: "Author: Yevgeny Toloknov",
-        routerZte: "ZTE TV Box",
-        links: {
-            "Скачать прошивку": "Download Firmware",
-            "Открыть инструкцию по прошивке": "Flashing Instructions",
-            "Открыть инструкцию по настройке": "Setup Instructions",
-            "Скачать прошивку версии (DVG)": "Download Firmware (DVG)",
-            "Скачать прошивку версии (DVN)": "Download Firmware (DVN)",
-            "Скачать прошивку версии R200": "Download Firmware R200",
-            "Скачать прошивку версии R201": "Download Firmware R201",
-            "Открыть инструкцию": "Open Instructions",
-            "Список актуальных каналов": "Channel List"
-        }
-    }
-};
-
-let currentLang = 'ru';
-
 const routersData = [
     {
         title: "AX3000",
@@ -84,6 +18,15 @@ const routersData = [
             { text: "Скачать прошивку", url: "https://john-toloknov.github.io/proshivok.net/YDK_MESH_V240729-sysupgrade.bin", target: "_blank" },
             { text: "Открыть инструкцию по прошивке", url: "Инструкция_по_обновлению_прошивки_роутера_M3000TP.pdf", target: "_blank" },
             { text: "Открыть инструкцию по настройке", url: "Настройка роутера M3000TR.pdf", target: "_blank" }
+        ]
+    },
+    {
+        title: "AX3000 GPON",
+        icon: "fa-wifi",
+        img: "gpon.png",
+        links: [
+            { text: "Скачать прошивку", url: "https://john-toloknov.github.io/proshivok.net/DGP-X3000TR_YDK_V3A1_V2.58a_OpenMarket_20251016-Image.bin", target: "_blank" },
+            { text: "Открыть инструкцию по прошивке", url: "Инструкция_по_обновлению_прошивки_роутера_X3000TR.pdf", target: "_blank" }
         ]
     },
     {
@@ -126,7 +69,6 @@ const routersData = [
     },
     {
         title: "Приставка ZTE",
-        isZte: true, // флаг для перевода названия приставки
         icon: "fa-television",
         img: "zte.jpg",
         links: [
@@ -185,30 +127,6 @@ function injectStyles() {
         .download-link-button a { text-decoration: none; color: #000000; display: block; transition: color 0.3s ease; }
         .download-link-button:hover { background-color: #808080; color: white; }
         .download-link-button:hover a { color: white; }
-        
-        .lang-switcher {
-            position: absolute;
-            top: 15px;
-            right: 25px;
-            z-index: 10;
-            display: flex;
-            gap: 5px;
-        }
-        .lang-btn {
-            background-color: #111;
-            color: #FFD700;
-            border: 1px solid #000;
-            padding: 5px 10px;
-            font-size: 14px;
-            font-weight: bold;
-            cursor: pointer;
-            border-radius: 4px;
-            transition: all 0.3s ease;
-        }
-        .lang-btn:hover, .lang-btn.active {
-            background-color: #808080;
-            color: #fff;
-        }
 
         @keyframes jump { 0% { transform: translateY(0); } 50% { transform: translateY(-10px); } 100% { transform: translateY(0); } }
         .panel img, .tabcontent img { animation: jump 2s infinite ease-in-out; }
@@ -250,39 +168,6 @@ function openTelegram() {
     window.open("https://t.me/John_Toloknov", "_blank"); 
 }
 
-function changeLanguage(lang) {
-    currentLang = lang;
-    
-    document.querySelectorAll('.lang-btn').forEach(btn => {
-        if(btn.getAttribute('data-lang') === lang) {
-            btn.classList.add('active');
-        } else {
-            btn.classList.remove('active');
-        }
-    });
-
-    document.getElementById('home-title').textContent = translations[lang].welcomeHeader;
-    document.getElementById('home-p1').textContent = translations[lang].welcomeText1;
-    document.getElementById('home-p2').textContent = translations[lang].welcomeText2;
-    document.getElementById('author-text').textContent = translations[lang].authorText;
-    document.getElementById('home-btn-text').innerHTML = `<i class="fa fa-home"></i> ${translations[lang].homeTitle}`;
-    document.getElementById('telegram-btn-text').innerHTML = `<i class="fa fa-telegram"></i> ${translations[lang].telegramTitle}`;
-
-    // Обновляем название приставки ZTE в аккордеоне
-    const zteBtn = document.getElementById('zte-accordion-btn');
-    if (zteBtn) {
-        zteBtn.innerHTML = `<i class="fa fa-television"></i> ${translations[lang].routerZte}`;
-    }
-
-    const linkAnchors = document.querySelectorAll('.download-link-button a');
-    linkAnchors.forEach(a => {
-        const originalText = a.getAttribute('data-original');
-        if (translations[lang].links[originalText]) {
-            a.textContent = translations[lang].links[originalText];
-        }
-    });
-}
-
 function initAccordionLogic() {
     const accordions = document.querySelectorAll(".accordion");
     accordions.forEach(button => {
@@ -320,21 +205,8 @@ function createDOM() {
     contentContainer.className = 'content-container expanded-content-container';
     body.appendChild(contentContainer);
 
-    const langSwitcher = document.createElement('div');
-    langSwitcher.className = 'lang-switcher';
-    ['ru', 'kz', 'en'].forEach(lang => {
-        const langBtn = document.createElement('button');
-        langBtn.className = 'lang-btn' + (lang === 'ru' ? ' active' : '');
-        langBtn.textContent = lang.toUpperCase();
-        langBtn.setAttribute('data-lang', lang);
-        langBtn.onclick = () => changeLanguage(lang);
-        langSwitcher.appendChild(langBtn);
-    });
-    contentContainer.appendChild(langSwitcher);
-
     const homeBtn = document.createElement('button');
     homeBtn.className = 'accordion';
-    homeBtn.id = 'home-btn-text';
     homeBtn.innerHTML = '<i class="fa fa-home"></i> HOME';
     homeBtn.onclick = (e) => showContentAndCloseAccordion(e);
     accordionContainer.appendChild(homeBtn);
@@ -342,9 +214,6 @@ function createDOM() {
     routersData.forEach(router => {
         const btn = document.createElement('button');
         btn.className = 'accordion';
-        if (router.isZte) {
-            btn.id = 'zte-accordion-btn';
-        }
         btn.innerHTML = `<i class="fa ${router.icon}"></i> ${router.title}`;
         accordionContainer.appendChild(btn);
 
@@ -361,7 +230,6 @@ function createDOM() {
             const a = document.createElement('a');
             a.href = linkInfo.url;
             a.textContent = linkInfo.text;
-            a.setAttribute('data-original', linkInfo.text);
             if (linkInfo.target) a.target = linkInfo.target;
             div.appendChild(a);
             panel.appendChild(div);
@@ -371,7 +239,6 @@ function createDOM() {
 
     const telegramButton = document.createElement('button');
     telegramButton.className = 'accordion';
-    telegramButton.id = 'telegram-btn-text';
     telegramButton.innerHTML = '<i class="fa fa-telegram"></i> TELEGRAM';
     telegramButton.onclick = openTelegram;
     accordionContainer.appendChild(telegramButton);
@@ -381,13 +248,13 @@ function createDOM() {
     homeContent.className = 'tabcontent';
     homeContent.innerHTML = `
         <div>
-            <h2 id="home-title">Програмное обеспечение</h2>
-            <p id="home-p1">Добро пожаловать! Здесь вы найдёте программное обеспечение и инструкции для актуальных моделей.</p>
-            <p id="home-p2">Выберите модель устройства в меню слева.</p>
+            <h2>Программное обеспечение</h2>
+            <p>Добро пожаловать! Здесь вы найдёте программное обеспечение и инструкции для актуальных моделей.</p>
+            <p>Выберите модель устройства в меню слева.</p>
             <img src="fon.png" alt="Главное изображение" style="width:100%; max-width: 600px; border-radius: 10px;">
         </div>
         <div>
-            <p id="author-text">Автор: Толокнов Евгений Алексеевич</p>
+            <p>Автор: Толокнов Евгений Алексеевич</p>
         </div>
     `;
     contentContainer.appendChild(homeContent);
