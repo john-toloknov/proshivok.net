@@ -131,15 +131,19 @@ function injectStyles() {
         .toggle-accordion-btn:hover { color: #808080; }
         .toggle-accordion-btn.hidden { opacity: 0; pointer-events: none; }
         
+        /* Главный аккордеон (Серый цвет при открытии/наведении) */
         .accordion { background-color: #111; color: white; cursor: pointer; padding: 18px; width: 100%; border: none; text-align: left; outline: none; font-size: 20px; transition: background-color 0.3s ease, color 0.3s ease; border-bottom: 1px solid #222; text-decoration: none; display: block; flex-shrink: 0; }
         .accordion i { margin-right: 10px; color: white; transition: color 0.3s ease; width: 22px; text-align: center; }
-        /* Точечное увеличение иконки телефона, чтобы визуально не казалась меньше */
         .accordion i.fa-mobile { font-size: 1.25em; vertical-align: -10%; }
         
         .accordion.active, .accordion:hover { background-color: #808080; color: white; }
         
+        /* Вложенный аккордеон (Желтый цвет при активном состоянии, серый при наведении) */
         .sub-accordion { background-color: #555555; font-size: 18px; padding-left: 35px; border-bottom: 1px solid #666; }
-        .sub-accordion.active, .sub-accordion:hover { background-color: #777777; color: white; }
+        .sub-accordion i { color: white; }
+        .sub-accordion:hover { background-color: #777777; color: white; }
+        .sub-accordion.active { background-color: #FFD700; color: #000000; }
+        .sub-accordion.active i { color: #000000; }
         
         .panel { padding: 0; background-color: #ffffff; max-height: 0; overflow: hidden; transition: max-height 0.4s ease-in-out; text-align: center; }
         .panel a { text-decoration: none; color: #000000; transition: color 0.3s ease; }
@@ -341,7 +345,7 @@ function createDOM() {
     homeBtn.onclick = (e) => showContentAndCloseAccordion(e);
     accordionContainer.appendChild(homeBtn);
 
-    // --- РАЗДЕЛ 1: ПРОШИВКИ (иконка разводного ключа fa-wrench) ---
+    // --- РАЗДЕЛ 1: ПРОШИВКИ ---
     const firmwaresBtn = document.createElement('button');
     firmwaresBtn.className = 'accordion';
     firmwaresBtn.innerHTML = '<i class="fa fa-wrench"></i> Прошивки';
@@ -380,7 +384,7 @@ function createDOM() {
     firmwaresWrapper.appendChild(innerFirmwareBox);
     accordionContainer.appendChild(firmwaresWrapper);
 
-    // --- РАЗДЕЛ 2: ПРИЛОЖЕНИЯ (иконка fa-mobile) ---
+    // --- РАЗДЕЛ 2: ПРИЛОЖЕНИЯ ---
     const appsBtn = document.createElement('button');
     appsBtn.className = 'accordion';
     appsBtn.innerHTML = '<i class="fa fa-mobile"></i> Приложения';
