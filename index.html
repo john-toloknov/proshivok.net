@@ -3,12 +3,13 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>Прошивки для роутеров</title>
+    <title>Прошивки и приложения</title>
 </head>
 <body>
 
 <script>
 
+// Данные прошивок
 const routersData = [
     {
         title: "AX3000",
@@ -76,16 +77,32 @@ const routersData = [
             { text: "Открыть инструкцию", url: "Инструкия-STB-ZTE.pdf", target: "_blank" },
             { text: "Список актуальных каналов", url: "https://docs.google.com/spreadsheets/d/1YB1xc289SKMpMcrI-Xr_oTEvGXIf2SroEWVaUeEY34o/edit?gid=1278118745#gid=1278118745", target: "_blank" }
         ]
-    },
-    {
-        title: "Fix Finder",
-        icon: "fa-wrench",
-        img: "Fixfinder.png",
-        links: [
-            { text: "Скачать для Android", url: "https://john-toloknov.github.io/proshivok.net/FixFinder_Mobile_0726.apk", target: "_blank" },
-            { text: "Скачать для IOS", url: "https://testflight.apple.com/join/ehtY99HQ", target: "_blank" }
-        ]
     }
+];
+
+// Данные приложений Android
+const androidApps = [
+    { title: "Fix Finder", url: "https://john-toloknov.github.io/proshivok.net/FixFinder_Mobile_0726.apk", icon: "fa-wrench" },
+    { title: "Партнер Beeline", url: "https://play.google.com/store/apps/details?id=beeline.sale.app", icon: "fa-external-link" },
+    { title: "Janymda", url: "https://play.google.com/store/apps/details?id=kz.beeline.odp", icon: "fa-external-link" },
+    { title: "Authenticator", url: "https://play.google.com/store/apps/details?id=com.google.android.apps.authenticator2", icon: "fa-external-link" },
+    { title: "Teams", url: "https://play.google.com/store/apps/details?id=com.microsoft.teams", icon: "fa-external-link" },
+    { title: "Documentolog", url: "https://play.google.com/store/apps/details?id=com.documentolog_mobile", icon: "fa-external-link" },
+    { title: "Darlean.kz", url: "https://play.google.com/store/apps/details?id=io.dar.qit.kz", icon: "fa-external-link" },
+    { title: "PingTools", url: "https://play.google.com/store/apps/details?id=ua.com.streamsoft.pingtools", icon: "fa-external-link" },
+    { title: "SpeedTest", url: "https://play.google.com/store/apps/details?id=org.zwanoo.android.speedtest", icon: "fa-external-link" }
+];
+
+// Данные приложений iOS
+const iosApps = [
+    { title: "Fix Finder", url: "https://testflight.apple.com/join/ehtY99HQ", icon: "fa-apple" },
+    { title: "Партнер Beeline", url: "https://apps.apple.com/kz/app/%D0%BF%D0%B0%D1%80%D1%82%D0%BD%D0%B5%D1%80-beeline/id1137831410", icon: "fa-external-link" },
+    { title: "Janymda", url: "https://apps.apple.com/kz/app/janymda-beeline-%D0%BA%D0%B0%D0%B7%D0%B0%D1%85%D1%81%D1%82%D0%B0%D0%BD/id711280776", icon: "fa-external-link" },
+    { title: "Authenticator", url: "https://apps.apple.com/kz/app/google-authenticator/id388497605", icon: "fa-external-link" },
+    { title: "Teams", url: "https://apps.apple.com/kz/app/microsoft-teams/id1113153706", icon: "fa-external-link" },
+    { title: "Documentolog", url: "https://apps.apple.com/kz/app/documentolog-2-0/id1512938400", icon: "fa-external-link" },
+    { title: "Darlean.kz", url: "https://apps.apple.com/kz/app/darlean-kz/id6449397848", icon: "fa-external-link" },
+    { title: "SpeedTest", url: "https://apps.apple.com/kz/app/speedtest-internet-wifi-test/id300704847", icon: "fa-external-link" }
 ];
 
 function injectStyles() {
@@ -109,13 +126,18 @@ function injectStyles() {
         .content-container { width: 60%; background-color: #FFD700; padding: 0; padding-top: 60px; overflow-y: auto; box-sizing: border-box; transition: width 0.5s ease; position: relative; }
         .hidden-accordion-container { width: 0; padding: 0; border: none; }
         .expanded-content-container { width: 100%; }
+        
         .toggle-accordion-btn { position: absolute; top: 15px; left: 25px; background-color: transparent; border: none; color: #000; font-size: 24px; cursor: pointer; z-index: 10; transition: all 0.5s ease; }
         .toggle-accordion-btn:hover { color: #808080; }
         .toggle-accordion-btn.hidden { opacity: 0; pointer-events: none; }
-        .accordion { background-color: #111; color: white; cursor: pointer; padding: 18px; width: 100%; border: none; text-align: left; outline: none; font-size: 20px; transition: background-color 0.3s ease, color 0.3s ease; border-bottom: 1px solid #111; text-decoration: none; display: block; }
+        
+        .accordion { background-color: #111; color: white; cursor: pointer; padding: 18px; width: 100%; border: none; text-align: left; outline: none; font-size: 20px; transition: background-color 0.3s ease, color 0.3s ease; border-bottom: 1px solid #222; text-decoration: none; display: block; }
         .accordion i { margin-right: 10px; color: white; transition: color 0.3s ease; }
         .accordion.active, .accordion:hover { background-color: #808080; color: white; }
-        .accordion.active i, .accordion:hover i { color: white; }
+        
+        /* Стиль для вложенного аккордеона / элементов меню */
+        .sub-accordion { background-color: #222; font-size: 18px; padding-left: 35px; border-bottom: 1px solid #333; }
+        
         .panel { padding: 0; background-color: #ffffff; max-height: 0; overflow: hidden; transition: max-height 0.4s ease-in-out; text-align: center; }
         .panel a { text-decoration: none; color: #000000; transition: color 0.3s ease; }
         .panel img { margin: 20px auto; display: block; }
@@ -137,9 +159,55 @@ function injectStyles() {
         .download-link-button:hover { background-color: #808080; color: white; }
         .download-link-button:hover a { color: white; }
 
+        /* Сетка для приложений (по 3 в ряд) */
+        .apps-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 15px;
+            padding: 20px;
+            background-color: #ffffff;
+            max-height: 0;
+            overflow: hidden;
+            transition: max-height 0.4s ease-in-out;
+        }
+        .app-card {
+            background-color: #FFD700;
+            border: 1px solid black;
+            border-radius: 8px;
+            padding: 15px 10px;
+            text-align: center;
+            text-decoration: none;
+            color: #000;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            transition: background-color 0.3s ease, color 0.3s ease;
+        }
+        .app-card i {
+            font-size: 28px;
+            margin-bottom: 8px;
+        }
+        .app-card span {
+            font-size: 14px;
+            font-weight: bold;
+        }
+        .app-card:hover {
+            background-color: #808080;
+            color: white;
+        }
+
         @keyframes jump { 0% { transform: translateY(0); } 50% { transform: translateY(-10px); } 100% { transform: translateY(0); } }
         .panel img, .tabcontent img { animation: jump 2s infinite ease-in-out; }
-        @media (max-width: 768px) { .accordion-container.full-width-accordion { width: 100%; } .content-container.hidden-content { width: 0; padding: 0; opacity: 0; pointer-events: none; } }
+
+        @media (max-width: 900px) {
+            .apps-grid { grid-template-columns: repeat(2, 1fr); }
+        }
+        @media (max-width: 768px) { 
+            .accordion-container.full-width-accordion { width: 100%; } 
+            .content-container.hidden-content { width: 0; padding: 0; opacity: 0; pointer-events: none; } 
+            .apps-grid { grid-template-columns: 1fr; }
+        }
     `;
     document.head.appendChild(style);
 }
@@ -165,12 +233,10 @@ function showContentAndCloseAccordion(event) {
     accordionContainer.classList.add('hidden-accordion-container');
     contentContainer.classList.add('expanded-content-container');
     toggleBtn.classList.remove('hidden');
-    const accordions = document.querySelectorAll(".accordion");
-    accordions.forEach(acc => {
-         acc.classList.remove("active");
-         const panel = acc.nextElementSibling;
-         if (panel && panel.classList.contains('panel')) { panel.style.maxHeight = null; }
-    });
+    
+    // Закрываем все панели
+    document.querySelectorAll(".accordion, .sub-accordion").forEach(acc => acc.classList.remove("active"));
+    document.querySelectorAll('.panel, .apps-grid').forEach(p => p.style.maxHeight = null);
 }
 
 function openTelegram() { 
@@ -178,22 +244,33 @@ function openTelegram() {
 }
 
 function initAccordionLogic() {
-    const accordions = document.querySelectorAll(".accordion");
+    // Основные аккордеоны и вложенные
+    const accordions = document.querySelectorAll(".accordion, .sub-accordion");
     accordions.forEach(button => {
-        if (button.nextElementSibling && button.nextElementSibling.classList.contains('panel')) {
-            button.addEventListener("click", function() {
-                const allPanels = document.querySelectorAll('.panel');
-                allPanels.forEach(p => {
-                    if (p !== this.nextElementSibling) {
-                        p.style.maxHeight = null;
-                        if(p.previousElementSibling) p.previousElementSibling.classList.remove('active');
+        button.addEventListener("click", function() {
+            const nextElem = this.nextElementSibling;
+            if (!nextElem || (!nextElem.classList.contains('panel') && !nextElem.classList.contains('apps-grid'))) return;
+
+            // Если это главный аккордеон первого уровня, закроем другие главные ветки
+            if (this.classList.contains('accordion') && !this.classList.contains('sub-accordion')) {
+                document.querySelectorAll('.accordion').forEach(acc => {
+                    if (acc !== this && acc.id !== 'home-btn' && acc.id !== 'telegram-btn') {
+                        acc.classList.remove('active');
+                        let next = acc.nextElementSibling;
+                        if (next && (next.classList.contains('panel') || next.classList.contains('apps-grid'))) {
+                            next.style.maxHeight = null;
+                        }
                     }
                 });
-                this.classList.toggle("active");
-                const panel = this.nextElementSibling;
-                if (panel.style.maxHeight) { panel.style.maxHeight = null; } else { panel.style.maxHeight = panel.scrollHeight + "px"; }
-            });
-        }
+            }
+
+            this.classList.toggle("active");
+            if (nextElem.style.maxHeight) { 
+                nextElem.style.maxHeight = null; 
+            } else { 
+                nextElem.style.maxHeight = nextElem.scrollHeight + "px"; 
+            }
+        });
     });
 }
 
@@ -214,23 +291,37 @@ function createDOM() {
     contentContainer.className = 'content-container expanded-content-container';
     body.appendChild(contentContainer);
 
+    // Кнопка HOME
     const homeBtn = document.createElement('button');
     homeBtn.className = 'accordion';
+    homeBtn.id = 'home-btn';
     homeBtn.innerHTML = '<i class="fa fa-home"></i> HOME';
     homeBtn.onclick = (e) => showContentAndCloseAccordion(e);
     accordionContainer.appendChild(homeBtn);
 
+    // --- РАЗДЕЛ 1: ПРОШИВКИ ---
+    const firmwaresBtn = document.createElement('button');
+    firmwaresBtn.className = 'accordion';
+    firmwaresBtn.innerHTML = '<i class="fa fa-microchip"></i> Прошивки';
+    accordionContainer.appendChild(firmwaresBtn);
+
+    const firmwaresWrapper = document.createElement('div');
+    firmwaresWrapper.className = 'panel';
+    firmwaresWrapper.style.padding = '0';
+    
+    // Внутренний контейнер для моделей роутеров
+    const innerFirmwareBox = document.createElement('div');
     routersData.forEach(router => {
-        const btn = document.createElement('button');
-        btn.className = 'accordion';
-        btn.innerHTML = `<i class="fa ${router.icon}"></i> ${router.title}`;
-        accordionContainer.appendChild(btn);
+        const subBtn = document.createElement('button');
+        subBtn.className = 'accordion sub-accordion';
+        subBtn.innerHTML = `<i class="fa ${router.icon}"></i> ${router.title}`;
+        innerFirmwareBox.appendChild(subBtn);
 
         const panel = document.createElement('div');
         panel.className = 'panel';
         const img = document.createElement('img');
         img.src = router.img;
-        img.width = 200; img.height = 200; img.alt = router.title;
+        img.width = 180; img.height = 180; img.alt = router.title;
         panel.appendChild(img);
 
         router.links.forEach(linkInfo => {
@@ -243,23 +334,79 @@ function createDOM() {
             div.appendChild(a);
             panel.appendChild(div);
         });
-        accordionContainer.appendChild(panel);
+        innerFirmwareBox.appendChild(panel);
     });
+    firmwaresWrapper.appendChild(innerFirmwareBox);
+    accordionContainer.appendChild(firmwaresWrapper);
 
+    // --- РАЗДЕЛ 2: ПРИЛОЖЕНИЯ ---
+    const appsBtn = document.createElement('button');
+    appsBtn.className = 'accordion';
+    appsBtn.innerHTML = '<i class="fa fa-mobile"></i> Приложения';
+    accordionContainer.appendChild(appsBtn);
+
+    const appsWrapper = document.createElement('div');
+    appsWrapper.className = 'panel';
+    appsWrapper.style.padding = '0';
+
+    const innerAppsBox = document.createElement('div');
+
+    // Подраздел: Android
+    const androidSubBtn = document.createElement('button');
+    androidSubBtn.className = 'accordion sub-accordion';
+    androidSubBtn.innerHTML = '<i class="fa fa-android"></i> ANDROID';
+    innerAppsBox.appendChild(androidSubBtn);
+
+    const androidGrid = document.createElement('div');
+    androidGrid.className = 'apps-grid';
+    androidApps.forEach(app => {
+        const card = document.createElement('a');
+        card.className = 'app-card';
+        card.href = app.url;
+        card.target = '_blank';
+        card.innerHTML = `<i class="fa ${app.icon}"></i><span>${app.title}</span>`;
+        androidGrid.appendChild(card);
+    });
+    innerAppsBox.appendChild(androidGrid);
+
+    // Подраздел: iOS
+    const iosSubBtn = document.createElement('button');
+    iosSubBtn.className = 'accordion sub-accordion';
+    iosSubBtn.innerHTML = '<i class="fa fa-apple"></i> IOS';
+    innerAppsBox.appendChild(iosSubBtn);
+
+    const iosGrid = document.createElement('div');
+    iosGrid.className = 'apps-grid';
+    iosApps.forEach(app => {
+        const card = document.createElement('a');
+        card.className = 'app-card';
+        card.href = app.url;
+        card.target = '_blank';
+        card.innerHTML = `<i class="fa ${app.icon}"></i><span>${app.title}</span>`;
+        iosGrid.appendChild(card);
+    });
+    innerAppsBox.appendChild(iosGrid);
+
+    appsWrapper.appendChild(innerAppsBox);
+    accordionContainer.appendChild(appsWrapper);
+
+    // Кнопка TELEGRAM
     const telegramButton = document.createElement('button');
     telegramButton.className = 'accordion';
+    telegramButton.id = 'telegram-btn';
     telegramButton.innerHTML = '<i class="fa fa-telegram"></i> TELEGRAM';
     telegramButton.onclick = openTelegram;
     accordionContainer.appendChild(telegramButton);
 
+    // Главная страница (HOME content)
     const homeContent = document.createElement('div');
     homeContent.id = 'home';
     homeContent.className = 'tabcontent';
     homeContent.innerHTML = `
         <div>
-            <h2>Программное обеспечение</h2>
-            <p>Добро пожаловать! Здесь вы найдёте программное обеспечение и инструкции для актуальных моделей.</p>
-            <p>Выберите модель устройства в меню слева.</p>
+            <h2>Каталог прошивок и рабочих приложений</h2>
+            <p>Добро пожаловать! Здесь собраны актуальные версии программного обеспечения, прошивки для роутеров и ТВ-приставок, а также необходимые мобильные приложения для работы и диагностики под Android и iOS.</p>
+            <p>Выберите нужный раздел в меню слева.</p>
             <img src="fon.png" alt="Главное изображение" style="width:100%; max-width: 600px; border-radius: 10px;">
         </div>
         <div>
