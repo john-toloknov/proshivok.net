@@ -80,9 +80,9 @@ const routersData = [
     }
 ];
 
-// Данные приложений Android
+// Данные приложений Android (с исправленной иконкой Fixfinder.png)
 const androidApps = [
-    { title: "Fix Finder", url: "https://john-toloknov.github.io/proshivok.net/FixFinder_Mobile_0726.apk", img: "кубик.png" },
+    { title: "Fix Finder", url: "https://john-toloknov.github.io/proshivok.net/FixFinder_Mobile_0726.apk", img: "Fixfinder.png" },
     { title: "Партнер Beeline", url: "https://play.google.com/store/apps/details?id=beeline.sale.app", img: "Партнер.png" },
     { title: "Janymda", url: "https://play.google.com/store/apps/details?id=kz.beeline.odp", img: "janymda.png" },
     { title: "Authenticator", url: "https://play.google.com/store/apps/details?id=com.google.android.apps.authenticator2", img: "authenticator.png" },
@@ -93,9 +93,9 @@ const androidApps = [
     { title: "SpeedTest", url: "https://play.google.com/store/apps/details?id=org.zwanoo.android.speedtest", img: "speedtest.png" }
 ];
 
-// Данные приложений iOS
+// Данные приложений iOS (с исправленной иконкой Fixfinder.png)
 const iosApps = [
-    { title: "Fix Finder", url: "https://testflight.apple.com/join/ehtY99HQ", img: "кубик.png" },
+    { title: "Fix Finder", url: "https://testflight.apple.com/join/ehtY99HQ", img: "Fixfinder.png" },
     { title: "Партнер Beeline", url: "https://apps.apple.com/kz/app/%D0%BF%D0%B0%D1%80%D1%82%D0%BD%D0%B5%D1%80-beeline/id1137831410", img: "Партнер.png" },
     { title: "Janymda", url: "https://apps.apple.com/kz/app/janymda-beeline-%D0%BA%D0%B0%D0%B7%D0%B0%D1%85%D1%81%D1%82%D0%B0%D0%BD/id711280776", img: "janymda.png" },
     { title: "Authenticator", url: "https://apps.apple.com/kz/app/google-authenticator/id388497605", img: "authenticator.png" },
@@ -135,8 +135,9 @@ function injectStyles() {
         .accordion i { margin-right: 10px; color: white; transition: color 0.3s ease; }
         .accordion.active, .accordion:hover { background-color: #808080; color: white; }
         
-        /* Вложенные аккордеоны */
-        .sub-accordion { background-color: #222; font-size: 18px; padding-left: 35px; border-bottom: 1px solid #333; }
+        /* Вложенные аккордеоны (серый цвет фона) */
+        .sub-accordion { background-color: #555555; font-size: 18px; padding-left: 35px; border-bottom: 1px solid #666; }
+        .sub-accordion.active, .sub-accordion:hover { background-color: #777777; color: white; }
         
         .panel { padding: 0; background-color: #ffffff; max-height: 0; overflow: hidden; transition: max-height 0.4s ease-in-out; text-align: center; }
         .panel a { text-decoration: none; color: #000000; transition: color 0.3s ease; }
@@ -159,20 +160,21 @@ function injectStyles() {
         .download-link-button:hover { background-color: #808080; color: white; }
         .download-link-button:hover a { color: white; }
 
-        /* Сетка для приложений (черный фон карточек, без подсветки фона при наведении) */
+        /* Сетка для приложений (3 в ряд, серый фон контейнера сетки, черные карточки) */
         .apps-grid {
             display: grid;
             grid-template-columns: repeat(3, 1fr);
             gap: 12px;
             padding: 15px;
-            background-color: #ffffff;
+            background-color: #333333;
             max-height: 0;
             overflow: hidden;
             transition: max-height 0.4s ease-in-out;
+            box-sizing: border-box;
         }
         .app-card {
             background-color: #000000;
-            border: 2px solid #222;
+            border: 2px solid #444;
             border-radius: 10px;
             padding: 12px 8px;
             text-align: center;
@@ -200,7 +202,7 @@ function injectStyles() {
             transition: opacity 0.1s ease;
         }
         
-        /* Эффект нажатия именно на иконку и содержимое карточки */
+        /* Эффект нажатия на саму иконку внутри карточки */
         .app-card:active img {
             transform: scale(0.85);
             filter: brightness(0.7);
@@ -286,7 +288,7 @@ function initAccordionLogic() {
         });
     });
 
-    // Вложенные аккордеоны (включая Android / iOS с взаимным закрытием)
+    // Вложенные аккордеоны (Android / iOS с взаимным закрытием)
     const subAccordions = document.querySelectorAll(".sub-accordion");
     subAccordions.forEach(subBtn => {
         subBtn.addEventListener("click", function(e) {
@@ -297,7 +299,7 @@ function initAccordionLogic() {
             const parentContainer = this.parentElement;
             const isSubOpen = this.classList.contains("active");
 
-            // Закрываем соседние вложенные аккордеоны в этой же группе (например, Android закроет iOS и наоборот)
+            // Закрываем соседние вложенные элементы в том же уровне (например, Android закроет iOS)
             parentContainer.querySelectorAll(':scope > .sub-accordion').forEach(sibling => {
                 if (sibling !== this) {
                     sibling.classList.remove("active");
@@ -318,7 +320,7 @@ function initAccordionLogic() {
             // Динамически расширяем родительский контейнер главного меню под открытый контент
             let parentPanel = this.closest('.panel');
             if (parentPanel && parentPanel.style.maxHeight) {
-                parentPanel.style.maxHeight = parentPanel.scrollHeight + 800 + "px";
+                parentPanel.style.maxHeight = parentPanel.scrollHeight + 1200 + "px";
             }
         });
     });
