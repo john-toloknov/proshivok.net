@@ -80,9 +80,9 @@ const routersData = [
     }
 ];
 
-// Данные приложений Android
+// Данные приложений Android (без подписи под Fix Finder, файл fixfinder.png)
 const androidApps = [
-    { title: "Fix Finder", url: "https://john-toloknov.github.io/proshivok.net/FixFinder_Mobile_0726.apk", img: "Fixfinder.png", showName: true },
+    { title: "Fix Finder", url: "https://john-toloknov.github.io/proshivok.net/FixFinder_Mobile_0726.apk", img: "fixfinder.png", showName: false },
     { title: "Партнер Beeline", url: "https://play.google.com/store/apps/details?id=beeline.sale.app", img: "Партнер.png", showName: false },
     { title: "Janymda", url: "https://play.google.com/store/apps/details?id=kz.beeline.odp", img: "janymda.png", showName: false },
     { title: "Authenticator", url: "https://play.google.com/store/apps/details?id=com.google.android.apps.authenticator2", img: "authenticator.png", showName: false },
@@ -93,9 +93,9 @@ const androidApps = [
     { title: "SpeedTest", url: "https://play.google.com/store/apps/details?id=org.zwanoo.android.speedtest", img: "speedtest.png", showName: false }
 ];
 
-// Данные приложений iOS
+// Данные приложений iOS (без подписи под Fix Finder, файл fixfinder.png)
 const iosApps = [
-    { title: "Fix Finder", url: "https://testflight.apple.com/join/ehtY99HQ", img: "Fixfinder.png", showName: true },
+    { title: "Fix Finder", url: "https://testflight.apple.com/join/ehtY99HQ", img: "fixfinder.png", showName: false },
     { title: "Партнер Beeline", url: "https://apps.apple.com/kz/app/%D0%BF%D0%B0%D1%80%D1%82%D0%BD%D0%B5%D1%80-beeline/id1137831410", img: "Партнер.png", showName: false },
     { title: "Janymda", url: "https://apps.apple.com/kz/app/janymda-beeline-%D0%BA%D0%B0%D0%B7%D0%B0%D1%85%D1%81%D1%82%D0%B0%D0%BD/id711280776", img: "janymda.png", showName: false },
     { title: "Authenticator", url: "https://apps.apple.com/kz/app/google-authenticator/id388497605", img: "authenticator.png", showName: false },
@@ -135,7 +135,6 @@ function injectStyles() {
         .accordion i { margin-right: 10px; color: white; transition: color 0.3s ease; }
         .accordion.active, .accordion:hover { background-color: #808080; color: white; }
         
-        /* Вложенные аккордеоны (серый цвет) */
         .sub-accordion { background-color: #555555; font-size: 18px; padding-left: 35px; border-bottom: 1px solid #666; }
         .sub-accordion.active, .sub-accordion:hover { background-color: #777777; color: white; }
         
@@ -160,7 +159,7 @@ function injectStyles() {
         .download-link-button:hover { background-color: #808080; color: white; }
         .download-link-button:hover a { color: white; }
 
-        /* Сетка для приложений (3 в ряд, одинаковый размер иконки) */
+        /* Увеличенные и реалистичные иконки (3 в ряд) */
         .apps-panel {
             padding: 0;
             background-color: #333333;
@@ -171,8 +170,8 @@ function injectStyles() {
         .apps-grid {
             display: grid;
             grid-template-columns: repeat(3, 1fr);
-            gap: 12px;
-            padding: 15px;
+            gap: 16px;
+            padding: 20px;
             box-sizing: border-box;
             background-color: #333333;
             justify-items: center;
@@ -191,28 +190,25 @@ function injectStyles() {
             justify-content: center;
         }
         .app-card img {
-            width: 52px;
-            height: 52px;
+            width: 76px;
+            height: 76px;
             object-fit: contain;
-            border-radius: 12px;
+            border-radius: 18px;
+            box-shadow: 0 6px 12px rgba(0,0,0,0.4);
             display: block;
-            transition: transform 0.1s ease, filter 0.1s ease;
+            transition: transform 0.2s ease, filter 0.2s ease;
         }
         .app-card span {
             font-size: 11px;
             font-weight: bold;
             color: #ffffff;
-            margin-top: 4px;
+            margin-top: 6px;
             line-height: 1.1;
-            transition: opacity 0.1s ease;
         }
         
         .app-card:active img {
-            transform: scale(0.85);
-            filter: brightness(0.7);
-        }
-        .app-card:active span {
-            opacity: 0.7;
+            transform: scale(0.9);
+            filter: brightness(0.8);
         }
 
         @keyframes jump { 0% { transform: translateY(0); } 50% { transform: translateY(-10px); } 100% { transform: translateY(0); } }
