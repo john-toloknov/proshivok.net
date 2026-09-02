@@ -118,12 +118,12 @@ function injectStyles() {
             background-color: #FFD700;
             margin: 0;
             display: flex;
-            min-height: 100vh;
-            transition: all 0.5s ease;
+            height: 100vh;
+            overflow: hidden;
             justify-content: center;
         }
-        .accordion-container { width: 40%; background-color: #111; color: white; padding-top: 60px; box-sizing: border-box; overflow-y: auto; transition: width 0.5s ease; }
-        .content-container { width: 60%; background-color: #FFD700; padding: 0; padding-top: 60px; overflow-y: auto; box-sizing: border-box; transition: width 0.5s ease; position: relative; }
+        .accordion-container { width: 40%; height: 100vh; background-color: #111; color: white; box-sizing: border-box; overflow-y: auto; overflow-x: hidden; transition: width 0.5s ease; }
+        .content-container { width: 60%; height: 100vh; background-color: #FFD700; padding: 0; overflow-y: auto; box-sizing: border-box; transition: width 0.5s ease; position: relative; }
         .hidden-accordion-container { width: 0; padding: 0; border: none; }
         .expanded-content-container { width: 100%; }
         
@@ -131,11 +131,11 @@ function injectStyles() {
         .toggle-accordion-btn:hover { color: #808080; }
         .toggle-accordion-btn.hidden { opacity: 0; pointer-events: none; }
         
-        .accordion { background-color: #111; color: white; cursor: pointer; padding: 18px; width: 100%; border: none; text-align: left; outline: none; font-size: 20px; transition: background-color 0.3s ease, color 0.3s ease; border-bottom: 1px solid #222; text-decoration: none; display: block; }
+        .accordion { background-color: #111; color: white; cursor: pointer; padding: 18px; width: 100%; border: none; text-align: left; outline: none; font-size: 20px; transition: background-color 0.3s ease, color 0.3s ease; border-bottom: 1px solid #222; text-decoration: none; display: block; flex-shrink: 0; }
         .accordion i { margin-right: 10px; color: white; transition: color 0.3s ease; }
         .accordion.active, .accordion:hover { background-color: #808080; color: white; }
         
-        /* Стиль для вложенного аккордеона / элементов меню */
+        /* Вложенные аккордеоны */
         .sub-accordion { background-color: #222; font-size: 18px; padding-left: 35px; border-bottom: 1px solid #333; }
         
         .panel { padding: 0; background-color: #ffffff; max-height: 0; overflow: hidden; transition: max-height 0.4s ease-in-out; text-align: center; }
@@ -147,8 +147,8 @@ function injectStyles() {
             flex-direction: column; 
             justify-content: space-between; 
             align-items: center; 
-            min-height: calc(100vh - 60px); 
-            padding: 20px 12px; 
+            min-height: 100vh; 
+            padding: 40px 12px 20px 12px; 
             box-sizing: border-box; 
             background-color: #FFD700; 
             text-align: center; 
@@ -234,7 +234,7 @@ function showContentAndCloseAccordion(event) {
     contentContainer.classList.add('expanded-content-container');
     toggleBtn.classList.remove('hidden');
     
-    // Закрываем все панели
+    // Закрываем всё при клике на HOME
     document.querySelectorAll(".accordion, .sub-accordion").forEach(acc => acc.classList.remove("active"));
     document.querySelectorAll('.panel, .apps-grid').forEach(p => p.style.maxHeight = null);
 }
@@ -244,31 +244,77 @@ function openTelegram() {
 }
 
 function initAccordionLogic() {
-    // Основные аккордеоны и вложенные
-    const accordions = document.querySelectorAll(".accordion, .sub-accordion");
-    accordions.forEach(button => {
-        button.addEventListener("click", function() {
-            const nextElem = this.nextElementSibling;
-            if (!nextElem || (!nextElem.classList.contains('panel') && !nextElem.classList.contains('apps-grid'))) return;
+    // Логика главных разделов первого уровня (HOME, Прошивки, Приложения, Telegram)
+    const mainAccordions = document.querySelectorAll(".accordion-container > .accordion");
+    
+    mainAccordions.forEach(button => {
+        // Пропускаем HOME и Telegram, у них своя логика
+        if (button.id === 'home-btn' || button.id === 'telegram-btn') return;
 
-            // Если это главный аккордеон первого уровня, закроем другие главные ветки
-            if (this.classList.contains('accordion') && !this.classList.contains('sub-accordion')) {
-                document.querySelectorAll('.accordion').forEach(acc => {
-                    if (acc !== this && acc.id !== 'home-btn' && acc.id !== 'telegram-btn') {
-                        acc.classList.remove('active');
-                        let next = acc.nextElementSibling;
-                        if (next && (next.classList.contains('panel') || next.classList.contains('apps-grid'))) {
-                            next.style.maxHeight = null;
-                        }
+        button.addEventListener("click", function() {
+            const panel = this.nextElementSibling;
+            const isOpen = this.classList.contains("active");
+
+            // Сначала закрываем абсолютно все главные разделы и их контент
+            mainAccordions.forEach(acc => {
+                acc.classList.remove("active");
+                const p = acc.nextElementSibling;
+                if (p && (p.classList.contains('panel') || p.classList.contains('apps-grid'))) {
+                    p.style.maxHeight = null;
+                    // Закрываем также все вложенные элементы внутри них
+                    p.querySelectorAll('.sub-accordion').forEach(sub => sub.classList.remove('active'));
+                    p.querySelectorAll('.panel, .apps-grid').forEach(subP => subP.style.maxHeight = null);
+                }
+            });
+
+            // Если он был закрыт — открываем
+            if (!isOpen) {
+                this.classList.add("active");
+                if (panel) {
+                    panel.style.maxHeight = panel.scrollHeight + "px";
+                }
+            }
+        });
+    });
+
+    // Логика вложенных аккордеонов (модели роутеров или Android/iOS)
+    const subAccordions = document.querySelectorAll(".sub-accordion");
+    subAccordions.forEach(subBtn => {
+        subBtn.addEventListener("click", function(e) {
+            e.stopPropagation(); // чтобы клик не уходил наверх
+            const subPanel = this.nextElementSibling;
+            if (!subPanel) return;
+
+            const parentContainer = this.parentElement;
+            const isSubOpen = this.classList.contains("active");
+
+            // Определяем, это подменю прошивок (где нужно открывать только по одному) 
+            // или подменю приложений (где Android и iOS могут открываться независимо)
+            const isFirmwareList = parentContainer.tagName === 'DIV' && !parentContainer.classList.contains('apps-grid') && !parentContainer.closest('.apps-grid');
+
+            if (isFirmwareList) {
+                // Закрываем соседние элементы в том же списке роутеров
+                parentContainer.querySelectorAll(':scope > .sub-accordion').forEach(sibling => {
+                    if (sibling !== this) {
+                        sibling.classList.remove("active");
+                        const p = sibling.nextElementSibling;
+                        if (p) p.style.maxHeight = null;
                     }
                 });
             }
 
+            // Переключаем текущий
             this.classList.toggle("active");
-            if (nextElem.style.maxHeight) { 
-                nextElem.style.maxHeight = null; 
-            } else { 
-                nextElem.style.maxHeight = nextElem.scrollHeight + "px"; 
+            if (isSubOpen) {
+                subPanel.style.maxHeight = null;
+            } else {
+                subPanel.style.maxHeight = subPanel.scrollHeight + "px";
+            }
+
+            // Корректируем высоту родительского главного панели, чтобы скролл работал правильно
+            let parentPanel = this.closest('.panel');
+            if (parentPanel && parentPanel.style.maxHeight) {
+                parentPanel.style.maxHeight = parentPanel.scrollHeight + 500 + "px";
             }
         });
     });
@@ -309,7 +355,6 @@ function createDOM() {
     firmwaresWrapper.className = 'panel';
     firmwaresWrapper.style.padding = '0';
     
-    // Внутренний контейнер для моделей роутеров
     const innerFirmwareBox = document.createElement('div');
     routersData.forEach(router => {
         const subBtn = document.createElement('button');
