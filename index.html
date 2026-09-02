@@ -133,6 +133,9 @@ function injectStyles() {
         
         .accordion { background-color: #111; color: white; cursor: pointer; padding: 18px; width: 100%; border: none; text-align: left; outline: none; font-size: 20px; transition: background-color 0.3s ease, color 0.3s ease; border-bottom: 1px solid #222; text-decoration: none; display: block; flex-shrink: 0; }
         .accordion i { margin-right: 10px; color: white; transition: color 0.3s ease; width: 22px; text-align: center; }
+        /* Точечное увеличение иконки телефона, чтобы визуально не казалась меньше */
+        .accordion i.fa-mobile { font-size: 1.25em; vertical-align: -10%; }
+        
         .accordion.active, .accordion:hover { background-color: #808080; color: white; }
         
         .sub-accordion { background-color: #555555; font-size: 18px; padding-left: 35px; border-bottom: 1px solid #666; }
@@ -338,10 +341,10 @@ function createDOM() {
     homeBtn.onclick = (e) => showContentAndCloseAccordion(e);
     accordionContainer.appendChild(homeBtn);
 
-    // --- РАЗДЕЛ 1: ПРОШИВКИ (иконка fa-key) ---
+    // --- РАЗДЕЛ 1: ПРОШИВКИ (иконка разводного ключа fa-wrench) ---
     const firmwaresBtn = document.createElement('button');
     firmwaresBtn.className = 'accordion';
-    firmwaresBtn.innerHTML = '<i class="fa fa-key"></i> Прошивки';
+    firmwaresBtn.innerHTML = '<i class="fa fa-wrench"></i> Прошивки';
     accordionContainer.appendChild(firmwaresBtn);
 
     const firmwaresWrapper = document.createElement('div');
@@ -377,7 +380,7 @@ function createDOM() {
     firmwaresWrapper.appendChild(innerFirmwareBox);
     accordionContainer.appendChild(firmwaresWrapper);
 
-    // --- РАЗДЕЛ 2: ПРИЛОЖЕНИЯ ---
+    // --- РАЗДЕЛ 2: ПРИЛОЖЕНИЯ (иконка fa-mobile) ---
     const appsBtn = document.createElement('button');
     appsBtn.className = 'accordion';
     appsBtn.innerHTML = '<i class="fa fa-mobile"></i> Приложения';
