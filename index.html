@@ -82,27 +82,27 @@ const routersData = [
 
 // Данные приложений Android
 const androidApps = [
-    { title: "Fix Finder", url: "https://john-toloknov.github.io/proshivok.net/FixFinder_Mobile_0726.apk", icon: "fa-wrench" },
-    { title: "Партнер Beeline", url: "https://play.google.com/store/apps/details?id=beeline.sale.app", icon: "fa-external-link" },
-    { title: "Janymda", url: "https://play.google.com/store/apps/details?id=kz.beeline.odp", icon: "fa-external-link" },
-    { title: "Authenticator", url: "https://play.google.com/store/apps/details?id=com.google.android.apps.authenticator2", icon: "fa-external-link" },
-    { title: "Teams", url: "https://play.google.com/store/apps/details?id=com.microsoft.teams", icon: "fa-external-link" },
-    { title: "Documentolog", url: "https://play.google.com/store/apps/details?id=com.documentolog_mobile", icon: "fa-external-link" },
-    { title: "Darlean.kz", url: "https://play.google.com/store/apps/details?id=io.dar.qit.kz", icon: "fa-external-link" },
-    { title: "PingTools", url: "https://play.google.com/store/apps/details?id=ua.com.streamsoft.pingtools", icon: "fa-external-link" },
-    { title: "SpeedTest", url: "https://play.google.com/store/apps/details?id=org.zwanoo.android.speedtest", icon: "fa-external-link" }
+    { title: "Fix Finder", url: "https://john-toloknov.github.io/proshivok.net/FixFinder_Mobile_0726.apk", img: "кубик.png" },
+    { title: "Партнер Beeline", url: "https://play.google.com/store/apps/details?id=beeline.sale.app", img: "Партнер.png" },
+    { title: "Janymda", url: "https://play.google.com/store/apps/details?id=kz.beeline.odp", img: "janymda.png" },
+    { title: "Authenticator", url: "https://play.google.com/store/apps/details?id=com.google.android.apps.authenticator2", img: "authenticator.png" },
+    { title: "Teams", url: "https://play.google.com/store/apps/details?id=com.microsoft.teams", img: "teams.png" },
+    { title: "Documentolog", url: "https://play.google.com/store/apps/details?id=com.documentolog_mobile", img: "documentolog.png" },
+    { title: "Darlean.kz", url: "https://play.google.com/store/apps/details?id=io.dar.qit.kz", img: "darlean.png" },
+    { title: "PingTools", url: "https://play.google.com/store/apps/details?id=ua.com.streamsoft.pingtools", img: "pingtools.png" },
+    { title: "SpeedTest", url: "https://play.google.com/store/apps/details?id=org.zwanoo.android.speedtest", img: "speedtest.png" }
 ];
 
 // Данные приложений iOS
 const iosApps = [
-    { title: "Fix Finder", url: "https://testflight.apple.com/join/ehtY99HQ", icon: "fa-apple" },
-    { title: "Партнер Beeline", url: "https://apps.apple.com/kz/app/%D0%BF%D0%B0%D1%80%D1%82%D0%BD%D0%B5%D1%80-beeline/id1137831410", icon: "fa-external-link" },
-    { title: "Janymda", url: "https://apps.apple.com/kz/app/janymda-beeline-%D0%BA%D0%B0%D0%B7%D0%B0%D1%85%D1%81%D1%82%D0%B0%D0%BD/id711280776", icon: "fa-external-link" },
-    { title: "Authenticator", url: "https://apps.apple.com/kz/app/google-authenticator/id388497605", icon: "fa-external-link" },
-    { title: "Teams", url: "https://apps.apple.com/kz/app/microsoft-teams/id1113153706", icon: "fa-external-link" },
-    { title: "Documentolog", url: "https://apps.apple.com/kz/app/documentolog-2-0/id1512938400", icon: "fa-external-link" },
-    { title: "Darlean.kz", url: "https://apps.apple.com/kz/app/darlean-kz/id6449397848", icon: "fa-external-link" },
-    { title: "SpeedTest", url: "https://apps.apple.com/kz/app/speedtest-internet-wifi-test/id300704847", icon: "fa-external-link" }
+    { title: "Fix Finder", url: "https://testflight.apple.com/join/ehtY99HQ", img: "кубик.png" },
+    { title: "Партнер Beeline", url: "https://apps.apple.com/kz/app/%D0%BF%D0%B0%D1%80%D1%82%D0%BD%D0%B5%D1%80-beeline/id1137831410", img: "Партнер.png" },
+    { title: "Janymda", url: "https://apps.apple.com/kz/app/janymda-beeline-%D0%BA%D0%B0%D0%B7%D0%B0%D1%85%D1%81%D1%82%D0%B0%D0%BD/id711280776", img: "janymda.png" },
+    { title: "Authenticator", url: "https://apps.apple.com/kz/app/google-authenticator/id388497605", img: "authenticator.png" },
+    { title: "Teams", url: "https://apps.apple.com/kz/app/microsoft-teams/id1113153706", img: "teams.png" },
+    { title: "Documentolog", url: "https://apps.apple.com/kz/app/documentolog-2-0/id1512938400", img: "documentolog.png" },
+    { title: "Darlean.kz", url: "https://apps.apple.com/kz/app/darlean-kz/id6449397848", img: "darlean.png" },
+    { title: "SpeedTest", url: "https://apps.apple.com/kz/app/speedtest-internet-wifi-test/id300704847", img: "speedtest.png" }
 ];
 
 function injectStyles() {
@@ -159,46 +159,58 @@ function injectStyles() {
         .download-link-button:hover { background-color: #808080; color: white; }
         .download-link-button:hover a { color: white; }
 
-        /* Сетка для приложений (по 3 в ряд) */
+        /* Сетка для приложений (черный фон карточек, без подсветки фона при наведении) */
         .apps-grid {
             display: grid;
             grid-template-columns: repeat(3, 1fr);
-            gap: 15px;
-            padding: 20px;
+            gap: 12px;
+            padding: 15px;
             background-color: #ffffff;
             max-height: 0;
             overflow: hidden;
             transition: max-height 0.4s ease-in-out;
         }
         .app-card {
-            background-color: #FFD700;
-            border: 1px solid black;
-            border-radius: 8px;
-            padding: 15px 10px;
+            background-color: #000000;
+            border: 2px solid #222;
+            border-radius: 10px;
+            padding: 12px 8px;
             text-align: center;
             text-decoration: none;
-            color: #000;
+            color: #ffffff;
             display: flex;
             flex-direction: column;
             align-items: center;
             justify-content: center;
-            transition: background-color 0.3s ease, color 0.3s ease;
         }
-        .app-card i {
-            font-size: 28px;
+        .app-card img {
+            width: 48px;
+            height: 48px;
+            object-fit: contain;
             margin-bottom: 8px;
+            border-radius: 8px;
+            display: block;
+            transition: transform 0.1s ease, filter 0.1s ease;
         }
         .app-card span {
-            font-size: 14px;
+            font-size: 13px;
             font-weight: bold;
+            color: #ffffff;
+            line-height: 1.2;
+            transition: opacity 0.1s ease;
         }
-        .app-card:hover {
-            background-color: #808080;
-            color: white;
+        
+        /* Эффект нажатия именно на иконку и содержимое карточки */
+        .app-card:active img {
+            transform: scale(0.85);
+            filter: brightness(0.7);
+        }
+        .app-card:active span {
+            opacity: 0.7;
         }
 
         @keyframes jump { 0% { transform: translateY(0); } 50% { transform: translateY(-10px); } 100% { transform: translateY(0); } }
-        .panel img, .tabcontent img { animation: jump 2s infinite ease-in-out; }
+        .panel img:not(.app-card img), .tabcontent img { animation: jump 2s infinite ease-in-out; }
 
         @media (max-width: 900px) {
             .apps-grid { grid-template-columns: repeat(2, 1fr); }
@@ -244,30 +256,27 @@ function openTelegram() {
 }
 
 function initAccordionLogic() {
-    // Логика главных разделов первого уровня (HOME, Прошивки, Приложения, Telegram)
+    // Главные разделы
     const mainAccordions = document.querySelectorAll(".accordion-container > .accordion");
     
     mainAccordions.forEach(button => {
-        // Пропускаем HOME и Telegram, у них своя логика
         if (button.id === 'home-btn' || button.id === 'telegram-btn') return;
 
         button.addEventListener("click", function() {
             const panel = this.nextElementSibling;
             const isOpen = this.classList.contains("active");
 
-            // Сначала закрываем абсолютно все главные разделы и их контент
+            // Закрываем все главные разделы
             mainAccordions.forEach(acc => {
                 acc.classList.remove("active");
                 const p = acc.nextElementSibling;
                 if (p && (p.classList.contains('panel') || p.classList.contains('apps-grid'))) {
                     p.style.maxHeight = null;
-                    // Закрываем также все вложенные элементы внутри них
                     p.querySelectorAll('.sub-accordion').forEach(sub => sub.classList.remove('active'));
                     p.querySelectorAll('.panel, .apps-grid').forEach(subP => subP.style.maxHeight = null);
                 }
             });
 
-            // Если он был закрыт — открываем
             if (!isOpen) {
                 this.classList.add("active");
                 if (panel) {
@@ -277,44 +286,39 @@ function initAccordionLogic() {
         });
     });
 
-    // Логика вложенных аккордеонов (модели роутеров или Android/iOS)
+    // Вложенные аккордеоны (включая Android / iOS с взаимным закрытием)
     const subAccordions = document.querySelectorAll(".sub-accordion");
     subAccordions.forEach(subBtn => {
         subBtn.addEventListener("click", function(e) {
-            e.stopPropagation(); // чтобы клик не уходил наверх
+            e.stopPropagation();
             const subPanel = this.nextElementSibling;
             if (!subPanel) return;
 
             const parentContainer = this.parentElement;
             const isSubOpen = this.classList.contains("active");
 
-            // Определяем, это подменю прошивок (где нужно открывать только по одному) 
-            // или подменю приложений (где Android и iOS могут открываться независимо)
-            const isFirmwareList = parentContainer.tagName === 'DIV' && !parentContainer.classList.contains('apps-grid') && !parentContainer.closest('.apps-grid');
+            // Закрываем соседние вложенные аккордеоны в этой же группе (например, Android закроет iOS и наоборот)
+            parentContainer.querySelectorAll(':scope > .sub-accordion').forEach(sibling => {
+                if (sibling !== this) {
+                    sibling.classList.remove("active");
+                    const p = sibling.nextElementSibling;
+                    if (p) p.style.maxHeight = null;
+                }
+            });
 
-            if (isFirmwareList) {
-                // Закрываем соседние элементы в том же списке роутеров
-                parentContainer.querySelectorAll(':scope > .sub-accordion').forEach(sibling => {
-                    if (sibling !== this) {
-                        sibling.classList.remove("active");
-                        const p = sibling.nextElementSibling;
-                        if (p) p.style.maxHeight = null;
-                    }
-                });
-            }
-
-            // Переключаем текущий
-            this.classList.toggle("active");
+            // Переключаем текущий подраздел
             if (isSubOpen) {
+                this.classList.remove("active");
                 subPanel.style.maxHeight = null;
             } else {
+                this.classList.add("active");
                 subPanel.style.maxHeight = subPanel.scrollHeight + "px";
             }
 
-            // Корректируем высоту родительского главного панели, чтобы скролл работал правильно
+            // Динамически расширяем родительский контейнер главного меню под открытый контент
             let parentPanel = this.closest('.panel');
             if (parentPanel && parentPanel.style.maxHeight) {
-                parentPanel.style.maxHeight = parentPanel.scrollHeight + 500 + "px";
+                parentPanel.style.maxHeight = parentPanel.scrollHeight + 800 + "px";
             }
         });
     });
@@ -409,7 +413,7 @@ function createDOM() {
         card.className = 'app-card';
         card.href = app.url;
         card.target = '_blank';
-        card.innerHTML = `<i class="fa ${app.icon}"></i><span>${app.title}</span>`;
+        card.innerHTML = `<img src="${app.img}" alt="${app.title}"><span>${app.title}</span>`;
         androidGrid.appendChild(card);
     });
     innerAppsBox.appendChild(androidGrid);
@@ -427,7 +431,7 @@ function createDOM() {
         card.className = 'app-card';
         card.href = app.url;
         card.target = '_blank';
-        card.innerHTML = `<i class="fa ${app.icon}"></i><span>${app.title}</span>`;
+        card.innerHTML = `<img src="${app.img}" alt="${app.title}"><span>${app.title}</span>`;
         iosGrid.appendChild(card);
     });
     innerAppsBox.appendChild(iosGrid);
