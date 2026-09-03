@@ -127,9 +127,28 @@ function injectStyles() {
         .hidden-accordion-container { width: 0; padding: 0; border: none; }
         .expanded-content-container { width: 100%; }
         
-        .toggle-accordion-btn { position: absolute; top: 15px; left: 25px; background-color: transparent; border: none; color: #000; font-size: 24px; cursor: pointer; z-index: 10; transition: all 0.5s ease; }
-        .toggle-accordion-btn:hover { color: #808080; }
-        .toggle-accordion-btn.hidden { opacity: 0; pointer-events: none; }
+        /* Анимация пульсации для подсказки нажатия кнопки меню */
+        @keyframes pulse-hamburger {
+            0% { transform: scale(1); opacity: 1; }
+            50% { transform: scale(1.2); opacity: 0.7; color: #333; }
+            100% { transform: scale(1); opacity: 1; }
+        }
+
+        .toggle-accordion-btn { 
+            position: absolute; 
+            top: 15px; 
+            left: 25px; 
+            background-color: transparent; 
+            border: none; 
+            color: #000; 
+            font-size: 26px; 
+            cursor: pointer; 
+            z-index: 10; 
+            transition: all 0.5s ease; 
+            animation: pulse-hamburger 2s infinite ease-in-out;
+        }
+        .toggle-accordion-btn:hover { color: #555; animation: none; transform: scale(1.1); }
+        .toggle-accordion-btn.hidden { opacity: 0; pointer-events: none; animation: none; }
         
         /* Главный аккордеон (Серый цвет при открытии/наведении) */
         .accordion { background-color: #111; color: white; cursor: pointer; padding: 18px; width: 100%; border: none; text-align: left; outline: none; font-size: 20px; transition: background-color 0.3s ease, color 0.3s ease; border-bottom: 1px solid #222; text-decoration: none; display: block; flex-shrink: 0; }
@@ -138,7 +157,7 @@ function injectStyles() {
         
         .accordion.active, .accordion:hover { background-color: #808080; color: white; }
         
-        /* Вложенный аккордеон (Желтый цвет при активном состоянии, серый при наведении) */
+        /* Вложенный аккордеон (Желтый цвет при активном состоянии) */
         .sub-accordion { background-color: #555555; font-size: 18px; padding-left: 35px; border-bottom: 1px solid #666; }
         .sub-accordion i { color: white; }
         .sub-accordion:hover { background-color: #777777; color: white; }
@@ -165,6 +184,41 @@ function injectStyles() {
         .download-link-button a { text-decoration: none; color: #000000; display: block; transition: color 0.3s ease; }
         .download-link-button:hover { background-color: #808080; color: white; }
         .download-link-button:hover a { color: white; }
+
+        /* Стиль для черно-желтой кнопки Telegram на главном экране */
+        .main-telegram-btn {
+            background-color: #111111;
+            color: #FFD700;
+            border: 2px solid #000000;
+            padding: 12px 28px;
+            font-size: 16px;
+            font-weight: bold;
+            cursor: pointer;
+            border-radius: 8px;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            gap: 10px;
+            text-decoration: none;
+            margin-top: 10px;
+            transition: background-color 0.3s ease, color 0.3s ease, transform 0.2s ease;
+            box-shadow: 0 4px 10px rgba(0,0,0,0.2);
+        }
+        .main-telegram-btn i {
+            color: #FFD700;
+            font-size: 20px;
+        }
+        .main-telegram-btn:hover {
+            background-color: #808080;
+            color: #ffffff;
+            border-color: #ffffff;
+        }
+        .main-telegram-btn:hover i {
+            color: #ffffff;
+        }
+        .main-telegram-btn:active {
+            transform: scale(0.95);
+        }
 
         .apps-panel {
             padding: 0;
@@ -262,7 +316,7 @@ function initAccordionLogic() {
     const mainAccordions = document.querySelectorAll(".accordion-container > .accordion");
     
     mainAccordions.forEach(button => {
-        if (button.id === 'home-btn' || button.id === 'telegram-btn') return;
+        if (button.id === 'home-btn') return;
 
         button.addEventListener("click", function() {
             const panel = this.nextElementSibling;
@@ -441,13 +495,6 @@ function createDOM() {
     appsWrapper.appendChild(innerAppsBox);
     accordionContainer.appendChild(appsWrapper);
 
-    const telegramButton = document.createElement('button');
-    telegramButton.className = 'accordion';
-    telegramButton.id = 'telegram-btn';
-    telegramButton.innerHTML = '<i class="fa fa-telegram"></i> TELEGRAM';
-    telegramButton.onclick = openTelegram;
-    accordionContainer.appendChild(telegramButton);
-
     const homeContent = document.createElement('div');
     homeContent.id = 'home';
     homeContent.className = 'tabcontent';
@@ -456,10 +503,13 @@ function createDOM() {
             <h2>Каталог прошивок и рабочих приложений</h2>
             <p>Добро пожаловать! Здесь собраны актуальные версии программного обеспечения, прошивки для роутеров и ТВ-приставок, а также необходимые мобильные приложения для работы и диагностики под Android и iOS.</p>
             <p>Выберите нужный раздел в меню слева.</p>
-            <img src="fon.png" alt="Главное изображение" style="width:100%; max-width: 600px; border-radius: 10px;">
+            <img src="fon.png" alt="Главное изображение" style="width:100%; max-width: 600px; border-radius: 10px; margin: 0 auto;">
         </div>
-        <div>
-            <p>Автор: Толокнов Евгений Алексеевич</p>
+        <div style="text-align: center; width: 100%;">
+            <p style="margin-bottom: 8px;">Автор: Толокнов Евгений Алексеевич</p>
+            <a href="https://t.me/John_Toloknov" target="_blank" class="main-telegram-btn">
+                <i class="fa fa-telegram"></i> Telegram
+            </a>
         </div>
     `;
     contentContainer.appendChild(homeContent);
