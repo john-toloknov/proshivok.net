@@ -127,11 +127,17 @@ function injectStyles() {
         .hidden-accordion-container { width: 0; padding: 0; border: none; }
         .expanded-content-container { width: 100%; }
         
-        /* Анимация пульсации для подсказки нажатия кнопки меню */
+        /* Анимация пульсации */
         @keyframes pulse-hamburger {
             0% { transform: scale(1); opacity: 1; }
             50% { transform: scale(1.2); opacity: 0.7; color: #333; }
             100% { transform: scale(1); opacity: 1; }
+        }
+
+        @keyframes pulse-telegram {
+            0% { transform: scale(1); box-shadow: 0 2px 5px rgba(0,0,0,0.2); }
+            50% { transform: scale(1.18); box-shadow: 0 4px 12px rgba(0,0,0,0.4); background-color: #333333; }
+            100% { transform: scale(1); box-shadow: 0 2px 5px rgba(0,0,0,0.2); }
         }
 
         .toggle-accordion-btn { 
@@ -185,38 +191,32 @@ function injectStyles() {
         .download-link-button:hover { background-color: #808080; color: white; }
         .download-link-button:hover a { color: white; }
 
-        /* Стиль для черно-желтой кнопки Telegram на главном экране */
-        .main-telegram-btn {
-            background-color: #111111;
-            color: #FFD700;
-            border: 2px solid #000000;
-            padding: 12px 28px;
-            font-size: 16px;
-            font-weight: bold;
-            cursor: pointer;
-            border-radius: 8px;
+        /* Стиль для инлайн иконки Telegram с пульсацией */
+        .author-telegram-link {
             display: inline-flex;
             align-items: center;
             justify-content: center;
-            gap: 10px;
-            text-decoration: none;
-            margin-top: 10px;
-            transition: background-color 0.3s ease, color 0.3s ease, transform 0.2s ease;
-            box-shadow: 0 4px 10px rgba(0,0,0,0.2);
-        }
-        .main-telegram-btn i {
+            background-color: #111111;
             color: #FFD700;
-            font-size: 20px;
+            width: 28px;
+            height: 28px;
+            border-radius: 50%;
+            text-decoration: none;
+            margin-left: 8px;
+            vertical-align: middle;
+            animation: pulse-telegram 2s infinite ease-in-out;
+            transition: background-color 0.3s ease;
         }
-        .main-telegram-btn:hover {
-            background-color: #808080;
-            color: #ffffff;
-            border-color: #ffffff;
+        .author-telegram-link i {
+            font-size: 14px;
+            color: #FFD700;
         }
-        .main-telegram-btn:hover i {
-            color: #ffffff;
+        .author-telegram-link:hover {
+            animation: none;
+            transform: scale(1.15);
+            background-color: #555555;
         }
-        .main-telegram-btn:active {
+        .author-telegram-link:active {
             transform: scale(0.95);
         }
 
@@ -306,10 +306,6 @@ function showContentAndCloseAccordion(event) {
     
     document.querySelectorAll(".accordion, .sub-accordion").forEach(acc => acc.classList.remove("active"));
     document.querySelectorAll('.panel, .apps-panel').forEach(p => p.style.maxHeight = null);
-}
-
-function openTelegram() { 
-    window.open("https://t.me/John_Toloknov", "_blank"); 
 }
 
 function initAccordionLogic() {
@@ -506,10 +502,12 @@ function createDOM() {
             <img src="fon.png" alt="Главное изображение" style="width:100%; max-width: 600px; border-radius: 10px; margin: 0 auto;">
         </div>
         <div style="text-align: center; width: 100%;">
-            <p style="margin-bottom: 8px;">Автор: Толокнов Евгений Алексеевич</p>
-            <a href="https://t.me/John_Toloknov" target="_blank" class="main-telegram-btn">
-                <i class="fa fa-telegram"></i> Telegram
-            </a>
+            <p style="margin: 0; display: inline-flex; align-items: center; justify-content: center;">
+                Автор: Толокнов Евгений Алексеевич
+                <a href="https://t.me/John_Toloknov" target="_blank" class="author-telegram-link" title="Telegram">
+                    <i class="fa fa-telegram"></i>
+                </a>
+            </p>
         </div>
     `;
     contentContainer.appendChild(homeContent);
@@ -529,3 +527,4 @@ document.addEventListener("DOMContentLoaded", function() {
 
 </body>
 </html>
+
