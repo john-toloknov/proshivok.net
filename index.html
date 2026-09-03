@@ -170,16 +170,16 @@ function injectStyles() {
         }
 
         /* 2. КЛЮЧ («Прошивки»): Закручивается / откручивается (поворот) и становится желтым */
-        .accordion:nth-child(2).active i.fa-wrench {
+        #firmware-btn.active i.fa-wrench {
             color: #FFD700;
             transform: rotate(-45deg) scale(1.2);
         }
 
-        /* 3. ТЕЛЕФОН («Приложения»): Экран заливается желтым светом */
-        .accordion:nth-child(3).active i.fa-mobile {
+        /* 3. ТЕЛЕФОН («Приложения»): Загорается желтым светом */
+        #apps-btn.active i.fa-mobile {
             color: #FFD700;
-            filter: drop-shadow(0 0 5px #FFD700);
-            transform: scale(1.15);
+            text-shadow: 0 0 10px #FFD700;
+            transform: scale(1.2);
         }
         
         .accordion.active, .accordion:hover { background-color: #808080; color: white; }
@@ -422,6 +422,7 @@ function createDOM() {
     // --- РАЗДЕЛ 1: ПРОШИВКИ ---
     const firmwaresBtn = document.createElement('button');
     firmwaresBtn.className = 'accordion';
+    firmwaresBtn.id = 'firmware-btn';
     firmwaresBtn.innerHTML = '<i class="fa fa-wrench"></i> Прошивки';
     accordionContainer.appendChild(firmwaresBtn);
 
@@ -461,6 +462,7 @@ function createDOM() {
     // --- РАЗДЕЛ 2: ПРИЛОЖЕНИЯ ---
     const appsBtn = document.createElement('button');
     appsBtn.className = 'accordion';
+    appsBtn.id = 'apps-btn';
     appsBtn.innerHTML = '<i class="fa fa-mobile"></i> Приложения';
     accordionContainer.appendChild(appsBtn);
 
